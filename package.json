@@ -1,0 +1,23 @@
+{
+  "name": "group-playground-technova",
+  "version": "1.0.0",
+  "description": "group-playground-TechNova",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PUP-BSIT/group-playground-technova.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PUP-BSIT/group-playground-technova/issues"
+  },
+  "homepage": "https://github.com/PUP-BSIT/group-playground-technova#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
