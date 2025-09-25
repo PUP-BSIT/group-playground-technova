@@ -1,0 +1,9 @@
+$para-color: rgb(100, 19, 147);
+
+.container {
+    color: white;
+    background-color: $para-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
