@@ -1,4 +1,5 @@
 $para-color: rgb(100, 19, 147);
+$bg-color: blue;
 
 .container {
     color: white;
@@ -6,4 +7,41 @@ $para-color: rgb(100, 19, 147);
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+@mixin button-styles($bg-color) {
+    padding: 10px 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+    color: white;
+    background-color: $bg-color;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+}
+
+.primary {
+    @include button-styles(blue);
+}
+
+.save {
+    @include button-styles(green);
+}
+
+.cancel {
+    @include button-styles(red);
 }
