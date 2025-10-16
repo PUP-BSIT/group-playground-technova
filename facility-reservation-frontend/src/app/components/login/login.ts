@@ -1,48 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
-  template: `
-    <div style="padding: 20px;">
-      <h1>Login Page Works!</h1>
-      <p>If you see this, routing is working.</p>
-      <button (click)="goToRegister()">Go to Register</button>
-      <button (click)="goToDashboard()">Go to Dashboard</button>
-    </div>
-  `,
-  styles: [`
-    div {
-      font-family: Arial, sans-serif;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      background: #28a745;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  `]
+  templateUrl: './login.html',
+  styleUrls: ['./login.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) { }
-
+  
+  showPassword: boolean = false;
+  
+  credentials = {
+    email: '',
+    password: ''
+  };
+  
+  constructor(private router: Router) {}
+  
   ngOnInit(): void {
-    console.log('Login component loaded!');
   }
-
+  
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+  
+  onLogin(): void {
+    if (!this.credentials.email || !this.credentials.password) {
+      alert('Please fill in all fields');
+      return;
+    }
+    
+    console.log('Login attempt:', this.credentials);
+    
+    // Navigate to dashboard after login
+    this.goToDashboard();
+  }
+  
+  onForgotPassword(event: Event): void {
+    event.preventDefault();
+    alert('Forgot password functionality coming soon!');
+  }
+  
   goToRegister(): void {
     this.router.navigate(['/register']);
   }
-
+  
   goToDashboard(): void {
     this.router.navigate(['/dashboard']);
   }
