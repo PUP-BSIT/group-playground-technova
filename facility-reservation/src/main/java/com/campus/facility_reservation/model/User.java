@@ -1,7 +1,8 @@
 package com.campus.facility_reservation.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import com.campus.facility_reservation.model.Role;
 
 @Entity
 @Table(name = "users")

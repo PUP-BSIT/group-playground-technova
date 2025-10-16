@@ -1,8 +1,8 @@
 package com.campus.facility_reservation.dto;
 
-import com.campus.facility_reservation.model.RoleType;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import com.campus.facility_reservation.model.Role;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 public class AuthRequest {
     @NotBlank(message = "Email is required")
@@ -21,7 +21,7 @@ public class AuthRequest {
     private String phoneNumber;
     
     @NotBlank(message = "Role is required")
-    private RoleType role;
+    private Role role;
     
     @NotBlank(message = "Organization name is required")
     private String organizationName;
@@ -43,8 +43,8 @@ public class AuthRequest {
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     
-    public RoleType getRole() { return role; }
-    public void setRole(RoleType role) { this.role = role; }
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
     
     public String getOrganizationName() { return organizationName; }
     public void setOrganizationName(String organizationName) { this.organizationName = organizationName; }

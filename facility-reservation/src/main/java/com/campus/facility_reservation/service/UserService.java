@@ -40,8 +40,18 @@ public class UserService {
             throw new RuntimeException("Invalid credentials");
         }
 
+        // Create AuthResponse using the no-arg constructor and setters
+        AuthResponse response = new AuthResponse();
+        response.setAccessToken("dummy-token");
+        response.setMessage("Login successful");
+        return response;
+
         // String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
-        // return new AuthResponse(token);
-        return new AuthResponse("dummy-token");
+        // AuthResponse response = new AuthResponse();
+        // response.setAccessToken(token);
+        // response.setMessage("Login successful");
+        // response.setUserId(user.getId());
+        // response.setRole(user.getRole().getName());
+        // return response;
     }
 }

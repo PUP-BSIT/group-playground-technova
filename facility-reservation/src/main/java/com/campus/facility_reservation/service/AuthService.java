@@ -1,7 +1,6 @@
 package com.campus.facility_reservation.service;
 
 import com.campus.facility_reservation.model.Role;
-import com.campus.facility_reservation.model.RoleType;
 import com.campus.facility_reservation.model.User;
 import com.campus.facility_reservation.repository.RoleRepository;
 import com.campus.facility_reservation.repository.UserRepository;

@@ -1,6 +1,6 @@
 package com.campus.facility_reservation.dto;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 public class RefreshTokenRequest {
     @NotBlank(message = "Refresh token is required")

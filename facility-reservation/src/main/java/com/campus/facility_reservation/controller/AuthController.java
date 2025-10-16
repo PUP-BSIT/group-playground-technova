@@ -1,4 +1,4 @@
-ackage com.campus.facility_reservation.controller;
+package com.campus.facility_reservation.controller;
 
 import com.campus.facility_reservation.dto.AuthRequest;
 import com.campus.facility_reservation.dto.AuthResponse;
@@ -8,7 +8,7 @@ import com.campus.facility_reservation.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -53,6 +53,7 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout() {
-        return ResponseEntity.ok(new AuthResponse(null, null, "Logout successful. Please remove tokens from client storage."));
+        return ResponseEntity
+                .ok(new AuthResponse(null, null, "Logout successful. Please remove tokens from client storage."));
     }
 }

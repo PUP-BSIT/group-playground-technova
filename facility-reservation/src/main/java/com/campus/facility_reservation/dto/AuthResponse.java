@@ -16,6 +16,13 @@ public class AuthResponse {
         this.message = message;
     }
 
+    public AuthResponse(String accessToken, String refreshToken, String message, String role) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.message = message;
+        this.role = role;
+    }
+
     public AuthResponse(String accessToken, String refreshToken, String message, Long userId, String role) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
