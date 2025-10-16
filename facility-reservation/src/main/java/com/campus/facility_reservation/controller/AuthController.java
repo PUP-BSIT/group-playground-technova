@@ -1,14 +1,15 @@
 package com.campus.facility_reservation.controller;
 
-// Controller to handle authentication-related endpoints
 import com.campus.facility_reservation.dto.RegisterRequest;
+import com.campus.facility_reservation.dto.LoginRequest;
+import com.campus.facility_reservation.dto.AuthResponse;
 import com.campus.facility_reservation.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth") // Base path for auth-related endpoints
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -19,9 +20,9 @@ public class AuthController {
         String result = userService.register(request);
         return ResponseEntity.ok(result);
     }
-}
 
-@PostMapping("/login")
-public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-    return ResponseEntity.ok(userService.login(request));
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(userService.login(request));
+    }
 }
