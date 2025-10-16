@@ -1,1 +1,97 @@
-<p>register works!</p>
+<div class="register-container">
+  <div class="register-card">
+    <h2>Campus Facility Reservation - Register</h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+      <div *ngIf="success" class="alert alert-success">{{ success }}</div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Enter email">
+        <small *ngIf="submitted && f['email'].errors" class="text-danger">
+          <span *ngIf="f['email'].errors['required']">Email is required</span>
+          <span *ngIf="f['email'].errors['email']">Invalid email format</span>
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Min 6 characters">
+        <small *ngIf="submitted && f['password'].errors" class="text-danger">
+          <span *ngIf="f['password'].errors['required']">Password is required</span>
+          <span *ngIf="f['password'].errors['minlength']">Min 6 characters</span>
+        </small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="firstName">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            formControlName="firstName">
+          <small *ngIf="submitted && f['firstName'].errors" class="text-danger">Required</small>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            formControlName="lastName">
+          <small *ngIf="submitted && f['lastName'].errors" class="text-danger">Required</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          class="form-control"
+          formControlName="phoneNumber"
+          placeholder="09xxxxxxxxx">
+        <small *ngIf="submitted && f['phoneNumber'].errors" class="text-danger">Required</small>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <select id="role" class="form-control" formControlName="role">
+          <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+        </select>
+        <small *ngIf="submitted && f['role'].errors" class="text-danger">Required</small>
+      </div>
+
+      <div class="form-group">
+        <label for="organizationName">Organization Name:</label>
+        <input
+          type="text"
+          id="organizationName"
+          class="form-control"
+          formControlName="organizationName"
+          placeholder="Organization name">
+        <small *ngIf="submitted && f['organizationName'].errors" class="text-danger">Required</small>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ loading ? 'Registering...' : 'Register' }}
+      </button>
+    </form>
+
+    <p class="text-center mt-3">
+      Already have an account? <a href="/login">Login here</a>
+    </p>
+  </div>
+</div>
