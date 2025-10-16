@@ -1,41 +1,77 @@
-import { Component, OnInit } from '@angular/core';
+// register.component.ts
+import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  template: `
-    <div style="padding: 20px;">
-      <h1>Register Page Works!</h1>
-      <p>If you see this, routing is working.</p>
-      <button (click)="goToLogin()">Go to Login</button>
-    </div>
-  `,
-  styles: [`
-    div {
-      font-family: Arial, sans-serif;
-    }
-    button {
-      padding: 10px 20px;
-      background: #ffc107;
-      color: black;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  `]
+  imports: [CommonModule, RouterModule, FormsModule],
+  templateUrl: './register.html',
+  styleUrls: ['./register.scss'],
 })
-export class RegisterComponent implements OnInit {
-  constructor(private router: Router) { }
+export class RegisterComponent {
+  currentStep = 1;
+  showPassword = false;
+  showConfirmPassword = false;
+  showFirstNameError = false;
+  passwordMismatch = false;
+  hasPasswordError = false;
 
-  ngOnInit(): void {
-    console.log('Register component loaded!');
+  formData = {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    studentId: '',
+    email: '',
+    phone: '',
+    address: '',
+    password: '',
+    confirmPassword: '',
+  };
+
+  nextStep() {
+    if (this.currentStep === 1) {
+      // Validate first name
+      if (!this.formData.firstName.trim()) {
+        this.showFirstNameError = true;
+        return;
+      }
+      this.showFirstNameError = false;
+    }
+
+    if (this.currentStep < 4) {
+      this.currentStep++;
+    }
   }
+
+  submitForm() {
+    // Check if passwords match
+    if (this.formData.password !== this.formData.confirmPassword) {
+      this.passwordMismatch = true;
+      this.hasPasswordError = true;
+      return;
+    }
+
+    this.passwordMismatch = false;
+    this.hasPasswordError = false;
+
+    // Move to success step
+    this.currentStep = 4;
+
+    // Here you would typically send the data to your backend
+    console.log('Form submitted:', this.formData);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+  constructor(private router: Router) {}
 
   goToLogin(): void {
     this.router.navigate(['/login']);
