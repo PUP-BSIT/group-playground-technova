@@ -1,6 +1,6 @@
 package com.campus.facility_reservation.controller;
 
-import com.campus.facility_reservation.dto.AuthRequest;
+import com.campus.facility_reservation.dto.RegisterRequest;
 import com.campus.facility_reservation.dto.UserResponse;
 import com.campus.facility_reservation.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class UserController {
     @PatchMapping("/update")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> updateUserProfile(Authentication authentication, 
-                                               @Valid @RequestBody AuthRequest request) {
+                                               @Valid @RequestBody RegisterRequest request) {
         try {
             Long userId = (Long) authentication.getPrincipal();
             UserResponse user = authService.updateUserProfile(userId, request);

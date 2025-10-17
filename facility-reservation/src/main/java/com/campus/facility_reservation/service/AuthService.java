@@ -1,11 +1,12 @@
 package com.campus.facility_reservation.service;
 
 import com.campus.facility_reservation.model.Role;
+import com.campus.facility_reservation.model.RoleType;
 import com.campus.facility_reservation.model.User;
 import com.campus.facility_reservation.repository.RoleRepository;
 import com.campus.facility_reservation.repository.UserRepository;
 import com.campus.facility_reservation.security.JwtTokenProvider;
-import com.campus.facility_reservation.dto.AuthRequest;
+import com.campus.facility_reservation.dto.RegisterRequest;
 import com.campus.facility_reservation.dto.AuthResponse;
 import com.campus.facility_reservation.dto.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,42 +30,43 @@ public class AuthService {
     private JwtTokenProvider jwtTokenProvider;
     
     // Register new user
-    public AuthResponse register(AuthRequest request) {
-        // Check if email already exists
+    // Assuming the method signature uses RegisterRequest, not AuthRequest
+    public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already registered");
+                throw new RuntimeException("Email already registered");
         }
         
-        // Get role from database
-        Role role = roleRepository.findByName(request.getRole())
-                .orElseThrow(() -> new RuntimeException("Role not found"));
-        
-        // Create new user
+        RoleType roleType = RoleType.valueOf(request.getRole().toUpperCase());
+        Role role = roleRepository.findByName(roleType)
+                .orElseThrow(() -> new RuntimeException("Role not found: " + request.getRole()));
+
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        // User fields added from the updated RegisterRequest DTO
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setRole(role);
         user.setOrganizationName(request.getOrganizationName());
+
+        user.setRole(role);
         user.setIsActive(true);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
         
         userRepository.save(user);
         
-        // Generate tokens
         String accessToken = jwtTokenProvider.generateAccessToken(user.getId(), 
-                user.getEmail(), role.getName().toString());
+                user.getEmail(), user.getRole().getName().toString());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId(), 
                 user.getEmail());
         
         return new AuthResponse(accessToken, refreshToken, "User registered successfully", 
-                user.getId(), role.getName().toString());
+                user.getId(), user.getRole().getName().toString());
     }
     
-    // Login user
+    // Login user (assuming AuthRequest or separate DTO is used here)
     public AuthResponse login(String email, String password) {
         // Find user by email
         User user = userRepository.findByEmail(email)
@@ -121,7 +123,8 @@ public class AuthService {
     }
     
     // Update user profile
-    public UserResponse updateUserProfile(Long userId, AuthRequest request) {
+    // Assuming the method signature uses RegisterRequest, not AuthRequest
+    public UserResponse updateUserProfile(Long userId, RegisterRequest request) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         

@@ -20,8 +20,7 @@ public class AuthRequest {
     
     private String phoneNumber;
     
-    @NotBlank(message = "Role is required")
-    private Role role;
+    private String role;
     
     @NotBlank(message = "Organization name is required")
     private String organizationName;
@@ -43,8 +42,8 @@ public class AuthRequest {
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
     
-    public Role getRole() { return role; }
-    public void setRole(Role role) { this.role = role; }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
     
     public String getOrganizationName() { return organizationName; }
     public void setOrganizationName(String organizationName) { this.organizationName = organizationName; }

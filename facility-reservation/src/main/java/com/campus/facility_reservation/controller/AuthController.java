@@ -1,6 +1,6 @@
 package com.campus.facility_reservation.controller;
 
-import com.campus.facility_reservation.dto.AuthRequest;
+import com.campus.facility_reservation.dto.RegisterRequest;
 import com.campus.facility_reservation.dto.AuthResponse;
 import com.campus.facility_reservation.dto.LoginRequest;
 import com.campus.facility_reservation.dto.RefreshTokenRequest;
@@ -19,7 +19,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody AuthRequest request) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
         try {
             AuthResponse response = authService.register(request);
             return ResponseEntity.ok(response);
