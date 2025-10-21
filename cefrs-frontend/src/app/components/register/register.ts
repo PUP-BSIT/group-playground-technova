@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth';
@@ -41,7 +41,8 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   nextStep() {
@@ -49,9 +50,8 @@ export class RegisterComponent {
     if (this.currentStep === 1) {
       this.showFirstNameError = !this.formData.firstName.trim();
       this.showLastNameError = !this.formData.lastName.trim();
-      this.showRoleError = !this.formData.role;
 
-      if (this.showFirstNameError || this.showLastNameError || this.showRoleError) {
+      if (this.showFirstNameError || this.showLastNameError) {
         return;
       }
     }
