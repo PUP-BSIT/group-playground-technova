@@ -1,0 +1,382 @@
+/* profile.scss - replace your existing file with this */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+.profile-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #e6e6e6;
+  font-family: "Poppins", sans-serif;
+  color: #222;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px; /* slightly wider for visual parity */
+  min-width: 240px;
+  background-color: #6e0000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.02) inset;
+
+  .logo {
+    padding: 2rem 1.5rem 1.2rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #fff;
+
+    span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: #ffdede;
+      margin-top: 0.35rem;
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+
+    .menu-item {
+      background: none;
+      border: none;
+      color: white;
+      text-align: left;
+      padding: 1.05rem 1.6rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.12s ease;
+      font-weight: 600;
+
+      &:hover {
+        background-color: rgba(255,255,255,0.03);
+      }
+
+      &.active {
+        background-color: rgba(255,255,255,0.06);
+        color: #fff;
+      }
+    }
+  }
+
+  .student-info {
+    display: flex;
+    align-items: center;
+    background: #5a0000;
+    padding: 0.9rem 1rem;
+    gap: 0.6rem;
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      flex-shrink: 0;
+    }
+
+    .details {
+      flex: 1;
+      margin-left: 0.4rem;
+
+      .name {
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+
+      .email {
+        font-size: 0.75rem;
+        color: #ffdede;
+        margin-top: 2px;
+      }
+    }
+
+    .logout-icon {
+      cursor: pointer;
+      font-size: 1.2rem;
+
+      &:hover {
+        color: #ffaaaa;
+      }
+    }
+  }
+}
+
+/* MAIN */
+.main-content {
+  flex: 1;
+  padding: 2.25rem 3.5rem;
+  overflow-y: auto;
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 1rem;
+  }
+
+  /* Profile card centered and narrower for that screenshot layout */
+  .profile-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem 2rem 2.25rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    max-width: 980px;
+    margin: 0 auto;
+    border: 1px solid rgba(0,0,0,0.04);
+
+    .header {
+      border-bottom: 1px solid #d6d6d6;
+      padding-bottom: 0.9rem;
+      margin-bottom: 1.25rem;
+
+      h2 {
+        color: #a10000;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        margin: 0;
+        padding-top: 0.25rem;
+      }
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 300px; /* left form / right photo column */
+      gap: 2rem;
+      align-items: start;
+
+      .left {
+        /* use grid rows where each .form-item is a pair: label column + input column */
+        display: grid;
+        grid-template-columns: 180px 1fr; /* label column narrow */
+        row-gap: 14px;
+        column-gap: 1.25rem;
+        align-items: center;
+
+        .form-item {
+          display: contents; /* allows label + field to sit in the grid columns */
+
+          label {
+            grid-column: 1 / 2;
+            justify-self: start;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 0;
+            display: inline-block;
+          }
+
+          p {
+            grid-column: 2 / 3;
+            margin: 0;
+            color: #111;
+            font-weight: 700;
+            font-size: 0.92rem;
+          }
+
+          input,
+          textarea {
+            grid-column: 2 / 3;
+            width: 100%;
+            border: 1px solid #d7d7d7;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+            transition: box-shadow 0.14s ease, border-color 0.12s ease;
+            outline: none;
+          }
+
+          textarea {
+            min-height: 68px;
+            resize: none;
+          }
+
+          input:focus,
+          textarea:focus {
+            border-color: #1f9cff;
+            box-shadow: 0 0 0 4px rgba(31,156,255,0.12);
+          }
+
+          /* ensure read-only p values and display-only rows look correct */
+          .value-text {
+            grid-column: 2 / 3;
+            margin-top: 2px;
+            color: #222;
+          }
+
+          small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.72rem;
+            color: #777;
+            margin-top: 3px;
+          }
+        }
+      }
+
+      .right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+
+        .photo-section {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 6px;
+
+          .photo-placeholder {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.06), inset 0 -6px 14px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+          }
+
+          img {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+          }
+
+          .default-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #222;
+            opacity: 0.95;
+          }
+
+          .upload-btn {
+            margin-top: 10px;
+            background: none;
+            border: none;
+            color: #6e0000;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.92rem;
+          }
+        }
+      }
+    }
+
+    .certification {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+
+      textarea {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #d6d6d6;
+        padding: 16px 18px 16px 34px; /* left padding to give room for the green bar visual */
+        font-style: italic;
+        color: #666;
+        resize: none;
+        height: 62px;
+        box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+        position: relative;
+      }
+
+      /* decorative green vertical bar on left similar to screenshot */
+      &::before {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 48px;
+        background: #0ea84f;
+        border-radius: 6px;
+        margin-right: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      }
+    }
+
+    .footer {
+      margin-top: 1.6rem;
+      text-align: left;
+
+      .btn-save {
+        background-color: #6e0000;
+        color: #fff;
+        border: none;
+        padding: 0.7rem 1.6rem;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+        box-shadow: 0 8px 18px rgba(110,0,0,0.12);
+        transition: transform 0.08s ease, background-color 0.12s ease;
+      }
+
+      .btn-save:hover {
+        transform: translateY(-2px);
+        background-color: #8c0000;
+      }
+    }
+  }
+}
+
+/* responsive adjustments */
+@media (max-width: 1100px) {
+  .main-content {
+    padding: 1.4rem;
+  }
+
+  .profile-card {
+    padding: 1rem 1.25rem;
+    max-width: 920px;
+
+    .content {
+      grid-template-columns: 1fr 240px;
+    }
+
+    .left {
+      grid-template-columns: 150px 1fr;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .sidebar {
+    display: none; /* mobile: hide for now */
+  }
+
+  .main-content {
+    padding: 1rem;
+  }
+
+  .profile-card {
+    margin: 0.5rem;
+    .content {
+      grid-template-columns: 1fr;
+    }
+
+    .right {
+      order: -1;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .left {
+      grid-template-columns: 1fr;
+      .form-item label { display: block; margin-bottom: 6px; }
+      input, textarea { grid-column: auto; }
+    }
+  }
+}

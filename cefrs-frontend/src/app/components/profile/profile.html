@@ -1,1 +1,101 @@
-<p>profile works!</p>
+<div class="profile-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">System name<br /><span>and logo</span></div>
+
+    <nav class="menu">
+      <button class="menu-item" (click)="goToDashboard()">Dashboard</button>
+      <button class="menu-item">Facilities</button>
+      <button class="menu-item">Equipment</button>
+      <button class="menu-item">My Request</button>
+      <button class="menu-item active">Settings</button>
+    </nav>
+
+    <div class="student-info">
+      <div class="avatar"></div>
+      <div class="details">
+        <div class="name">{{ profileForm.get('firstName')?.value }} {{ profileForm.get('lastName')?.value }}</div>
+        <div class="email">{{ profileForm.get('email')?.value }}</div>
+      </div>
+      <div class="logout-icon" (click)="logout()" title="Logout">⇦</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <h1>Personal Data</h1>
+
+    <div class="profile-card" *ngIf="!isLoading; else loading">
+      <form [formGroup]="profileForm" novalidate>
+        <div class="header">
+          <h2>
+            {{ profileForm.get('lastName')?.value | uppercase }},
+            {{ profileForm.get('firstName')?.value | uppercase }}
+            ({{ profileForm.get('studentNumber')?.value }})
+          </h2>
+        </div>
+
+        <div class="content">
+          <div class="left">
+            <div class="form-item">
+              <label>Student Number</label>
+              <p>{{ profileForm.get('studentNumber')?.value }}</p>
+            </div>
+
+            <div class="form-item">
+              <label>Name</label>
+              <p>{{ profileForm.get('lastName')?.value }}, {{ profileForm.get('firstName')?.value }}</p>
+            </div>
+
+            <div class="form-item">
+              <label>Mobile No.</label>
+              <input type="text" formControlName="mobileNumber" />
+            </div>
+
+            <div class="form-item">
+              <label>Email Address</label>
+              <input type="email" formControlName="email" />
+            </div>
+
+            <div class="form-item">
+              <label>Residential Address</label>
+              <textarea formControlName="residentialAddress" rows="2"></textarea>
+            </div>
+
+            <div class="form-item">
+              <label>Permanent Address</label>
+              <textarea formControlName="permanentAddress" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="photo-section">
+              <div class="photo-placeholder">
+                <img *ngIf="profileImageUrl; else defaultPhoto" [src]="profileImageUrl" alt="Profile Photo" />
+                <ng-template #defaultPhoto>
+                  <div class="default-avatar"></div>
+                </ng-template>
+              </div>
+              <button type="button" class="upload-btn" (click)="uploadPhoto()">Upload Photo</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="certification">
+          <textarea readonly>I hereby certify that all the information provided 
+              are true and correct to the best of my knowledge.</textarea>
+        </div>
+
+        <div class="footer">
+          <button class="btn-save" type="button" (click)="saveProfile()">Save</button>
+        </div>
+      </form>
+    </div>
+
+    <ng-template #loading>
+      <p>Loading profile...</p>
+    </ng-template>
+
+    <p *ngIf="alertMessage" class="alert">{{ alertMessage }}</p>
+  </main>
+</div>

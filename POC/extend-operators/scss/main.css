@@ -1,0 +1,102 @@
+.button-basic, .button-submit, .button-report {
+  border: none;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-report {
+  background-color: red;
+}
+
+.button-submit {
+  background-color: green;
+  color: white;
+}
+
+.container {
+  width: 1000px;
+  padding: 10px;
+  margin: 25px;
+  height: 80px;
+  background-color: #2ecc71;
+}
+
+.responsive-width {
+  width: 31.3333333333%;
+  margin: 1%;
+}
+
+.comparison-examples {
+  background: #333;
+  color: white;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.logical-examples {
+  margin-top: 10px;
+  background: #222;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.btn-primary {
+  background: #3498db;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: rgb(33.1380753138, 125.1882845188, 186.8619246862);
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.btn-danger:hover {
+  background: rgb(213.698630137, 43.8356164384, 26.301369863);
+}
+
+.btn-success {
+  background: #2ecc71;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.btn-success:hover {
+  background: rgb(36.616, 162.384, 89.948);
+}
+
+.btn-primary {
+  font-family: Arial, sans-serif;
+  content: "btn-primary";
+  width: 50px;
+  margin: 10px;
+}
+
+.color-demo {
+  margin: 10px;
+  background: #3498db;
+  border: 2px solid rgb(29.2970711297, 110.6778242678, 165.2029288703);
+  color: rgb(181.9539748954, 217.9372384937, 242.0460251046);
+}
+
+.alert {
+  margin: 10px;
+  background: rgb(141.5, 114, 139.5);
+  color: rgb(209.1, 93.801754386, 81.9);
+}/*# sourceMappingURL=main.css.map */
