@@ -8,7 +8,18 @@
       <button class="menu-item">Facilities</button>
       <button class="menu-item">Equipment</button>
       <button class="menu-item">My Request</button>
-      <button class="menu-item active">Settings</button>
+      
+      <!-- Settings with dropdown -->
+      <div class="settings-wrapper">
+        <button class="menu-item active" (click)="toggleSettingsDropdown()">
+          Settings
+          <span class="arrow" [class.open]="isSettingsOpen">▼</span>
+        </button>
+        <div class="settings-dropdown" [class.show]="isSettingsOpen">
+          <button class="submenu-item active" (click)="goToEditProfile()">Edit Profile</button>
+          <button class="submenu-item" (click)="goToChangePassword()">Change Password</button>
+        </div>
+      </div>
     </nav>
 
     <div class="student-info">
@@ -82,8 +93,7 @@
         </div>
 
         <div class="certification">
-          <textarea readonly>I hereby certify that all the information provided 
-              are true and correct to the best of my knowledge.</textarea>
+          <textarea readonly>I hereby certify that all the information provided are true and correct to the best of my knowledge.</textarea>
         </div>
 
         <div class="footer">

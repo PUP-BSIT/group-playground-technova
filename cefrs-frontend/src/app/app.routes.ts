@@ -5,6 +5,7 @@ import { OrgLoginComponent } from './components/org-login/org-login';
 import { RegisterComponent } from './components/register/register';
 import { DashboardComponent } from './components/dashboard/dashboard';
 import { ProfileComponent } from './components/profile/profile';
+import { ChangePasswordComponent } from './components/student-change-password/student-change-password';
 
 export const routes: Routes = [
     { path: '', component: RoleSelectionComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
     { path: 'org-login', component: OrgLoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'dashboard', component: DashboardComponent },
-    {path: 'profile', component: ProfileComponent}
+    {path: 'profile', component: ProfileComponent},
+    {path: 'student-change-password', component: ChangePasswordComponent}
 ];
