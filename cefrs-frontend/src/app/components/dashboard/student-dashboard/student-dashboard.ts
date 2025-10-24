@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth';
+import { SidebarComponent } from '../../sidebar/sidebar';
 
 // --- INTERFACES ---
 interface User {
@@ -52,7 +53,7 @@ interface Equipment {
 @Component({
   selector: 'app-student-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, SidebarComponent],
   templateUrl: './student-dashboard.html',
   styleUrls: ['./student-dashboard.scss']
 })
@@ -138,6 +139,10 @@ export class StudentDashboard implements OnInit {
     }
   }
 
+  onSidebarViewChange(view: string): void {
+    this.setView(view as 'dashboard' | 'facilities' | 'equipment' | 'requests' | 'settings');
+  }
+
   getStatusClass(status: string): string {
     const map: Record<string, string> = {
       Approved: 'status-approved',
@@ -148,10 +153,5 @@ export class StudentDashboard implements OnInit {
       Reserved: 'status-reserved'
     };
     return map[status] || '';
-  }
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
   }
 }
