@@ -1,111 +1,102 @@
-<div class="profile-layout">
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">System name<br /><span>and logo</span></div>
+<div class="profile-container">
+  <h1 class="page-title">Personal Data</h1>
 
-    <nav class="menu">
-      <button class="menu-item" (click)="goToDashboard()">Dashboard</button>
-      <button class="menu-item">Facilities</button>
-      <button class="menu-item">Equipment</button>
-      <button class="menu-item">My Request</button>
-      
-      <!-- Settings with dropdown -->
-      <div class="settings-wrapper">
-        <button class="menu-item active" (click)="toggleSettingsDropdown()">
-          Settings
-          <span class="arrow" [class.open]="isSettingsOpen">▼</span>
-        </button>
-        <div class="settings-dropdown" [class.show]="isSettingsOpen">
-          <button class="submenu-item active" (click)="goToEditProfile()">Edit Profile</button>
-          <button class="submenu-item" (click)="goToChangePassword()">Change Password</button>
-        </div>
-      </div>
-    </nav>
+  @if (loading) {
+    <p>Loading profile...</p>
+  } @else {
+    <div class="profile-card">
+      <h2 class="user-header">
+        {{ user?.lastName | uppercase }}, {{ user?.firstName | uppercase }}
+        <span class="student-id">({{ user?.studentNumber }})</span>
+      </h2>
 
-    <div class="student-info">
-      <div class="avatar"></div>
-      <div class="details">
-        <div class="name">{{ profileForm.get('firstName')?.value }} {{ profileForm.get('lastName')?.value }}</div>
-        <div class="email">{{ profileForm.get('email')?.value }}</div>
-      </div>
-      <div class="logout-icon" (click)="logout()" title="Logout">⇦</div>
-    </div>
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-    <h1>Personal Data</h1>
-
-    <div class="profile-card" *ngIf="!isLoading; else loading">
-      <form [formGroup]="profileForm" novalidate>
-        <div class="header">
-          <h2>
-            {{ profileForm.get('lastName')?.value | uppercase }},
-            {{ profileForm.get('firstName')?.value | uppercase }}
-            ({{ profileForm.get('studentNumber')?.value }})
-          </h2>
-        </div>
-
-        <div class="content">
-          <div class="left">
-            <div class="form-item">
-              <label>Student Number</label>
-              <p>{{ profileForm.get('studentNumber')?.value }}</p>
-            </div>
-
-            <div class="form-item">
-              <label>Name</label>
-              <p>{{ profileForm.get('lastName')?.value }}, {{ profileForm.get('firstName')?.value }}</p>
-            </div>
-
-            <div class="form-item">
-              <label>Mobile No.</label>
-              <input type="text" formControlName="mobileNumber" />
-            </div>
-
-            <div class="form-item">
-              <label>Email Address</label>
-              <input type="email" formControlName="email" />
-            </div>
-
-            <div class="form-item">
-              <label>Residential Address</label>
-              <textarea formControlName="residentialAddress" rows="2"></textarea>
-            </div>
-
-            <div class="form-item">
-              <label>Permanent Address</label>
-              <textarea formControlName="permanentAddress" rows="2"></textarea>
-            </div>
+      <form [formGroup]="profileForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Student Number</label>
+            <input type="text" formControlName="studentNumber" [disabled]="true" />
           </div>
 
-          <div class="right">
-            <div class="photo-section">
-              <div class="photo-placeholder">
-                <img *ngIf="profileImageUrl; else defaultPhoto" [src]="profileImageUrl" alt="Profile Photo" />
-                <ng-template #defaultPhoto>
-                  <div class="default-avatar"></div>
-                </ng-template>
-              </div>
-              <button type="button" class="upload-btn" (click)="uploadPhoto()">Upload Photo</button>
-            </div>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" formControlName="name" [disabled]="true" />
+          </div>
+
+          <div class="form-group">
+            <label>Mobile No.</label>
+            <input
+              type="text"
+              formControlName="phoneNumber"
+              [disabled]="!isEditing"
+              [class.invalid]="profileForm.get('phoneNumber')?.touched && profileForm.get('phoneNumber')?.invalid"
+            />
+            @if (profileForm.get('phoneNumber')?.touched && profileForm.get('phoneNumber')?.invalid) {
+              <small class="error">Enter a valid mobile number.</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              formControlName="email"
+              [disabled]="!isEditing"
+              [class.invalid]="profileForm.get('email')?.touched && profileForm.get('email')?.invalid"
+            />
+            @if (profileForm.get('email')?.touched && profileForm.get('email')?.invalid) {
+              <small class="error">Enter a valid email.</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label>Address</label>
+            <input
+              type="text"
+              formControlName="address"
+              [disabled]="!isEditing"
+              [class.invalid]="profileForm.get('address')?.touched && profileForm.get('address')?.invalid"
+            />
+            @if (profileForm.get('address')?.touched && profileForm.get('address')?.invalid) {
+              <small class="error">Address is required.</small>
+            }
           </div>
         </div>
 
-        <div class="certification">
-          <textarea readonly>I hereby certify that all the information provided are true and correct to the best of my knowledge.</textarea>
+        <div class="button-group">
+          <button
+            type="button"
+            class="edit-btn"
+            (click)="toggleEdit()"
+            *ngIf="!isEditing"
+          >
+            Edit Profile
+          </button>
+
+          <button
+            type="button"
+            class="save-btn"
+            (click)="saveProfile()"
+            *ngIf="isEditing"
+          >
+            Save Changes
+          </button>
+
+          <button
+            type="button"
+            class="change-pass-btn"
+            (click)="navigateToChangePassword()"
+          >
+            Change Password
+          </button>
         </div>
 
-        <div class="footer">
-          <button class="btn-save" type="button" (click)="saveProfile()">Save</button>
-        </div>
+        @if (successMessage) {
+          <div class="alert success">{{ successMessage }}</div>
+        }
+        @if (errorMessage) {
+          <div class="alert error">{{ errorMessage }}</div>
+        }
       </form>
     </div>
-
-    <ng-template #loading>
-      <p>Loading profile...</p>
-    </ng-template>
-
-    <p *ngIf="alertMessage" class="alert">{{ alertMessage }}</p>
-  </main>
+  }
 </div>

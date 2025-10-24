@@ -6,53 +6,42 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/user';
+  private apiUrl = 'http://localhost:8080/api/user'; 
 
-  getProfile(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token') || '';
+    return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
+  }
 
-    return this.http.get(`${this.apiUrl}/profile`, { headers });
+  getProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile`, {
+      headers: this.getHeaders()
+    });
   }
 
   updateProfile(data: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+    return this.http.patch(`${this.apiUrl}/update`, data, {
+      headers: this.getHeaders()
     });
-
-    return this.http.patch(`${this.apiUrl}/update`, data, { headers });
   }
 
-  /**
-   * Change user password
-   * @param userId - User ID
-   * @param currentPassword - Current password for verification
-   * @param newPassword - New password to set
-   */
-  changePassword(userId: number, currentPassword: string, newPassword: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+  changePassword(
+    userId: number,
+    currentPassword: string,
+    newPassword: string
+  ): Observable<any> {
+    const payload = { currentPassword, newPassword };
+    return this.http.post(`${this.apiUrl}/${userId}/change-password`, payload, {
+      headers: this.getHeaders()
     });
-
-    const payload = {
-      currentPassword,
-      newPassword
-    };
-
-    return this.http.post(`${this.apiUrl}/${userId}/change-password`, payload, { headers });
   }
 
   uploadProfileImage(userId: number, file: File): Observable<any> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
@@ -60,6 +49,8 @@ export class ProfileService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(`${this.apiUrl}/${userId}/upload-image`, formData, { headers });
+    return this.http.post(`${this.apiUrl}/${userId}/upload-image`, formData, {
+      headers
+    });
   }
 }
