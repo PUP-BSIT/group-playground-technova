@@ -1,14 +1,37 @@
-.profile-container {
-  padding: 2rem;
-  background-color: #f4f4f4;
-  font-family: 'Poppins', sans-serif;
-  height: 100%;
+.profile-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
 
-  .page-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #7d0b12;
+.main-content {
+  margin-left: 280px;
+  flex: 1;
+  padding: 1rem;
+  min-height: 100vh;
+  overflow-y: auto;
+  width: calc(100% - 280px);
+}
+
+.profile-container {
+  padding: 0;
+  background-color: transparent;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+
+  .nav-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1.5rem;
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #7d0b12;
+      margin: 0;
+    }
   }
 
   .profile-card {
@@ -16,7 +39,7 @@
     padding: 2rem 2.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    max-width: 800px;
+    max-width: 700px;
   }
 
   .user-header {
@@ -129,6 +152,20 @@
       background-color: #fce8e6;
       color: #d93025;
       border: 1px solid #f5c6cb;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 0.5rem;
+  }
+  
+  .profile-container {
+    .profile-card {
+      padding: 1rem;
     }
   }
 }

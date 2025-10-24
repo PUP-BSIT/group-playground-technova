@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ProfileService } from '../../services/profile.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SidebarComponent } from '../sidebar/sidebar';
 
 @Component({
   selector: 'app-student-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
   templateUrl: './profile.html',
   styleUrls: ['./profile.scss']
 })
@@ -26,6 +27,10 @@ export class StudentProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProfile();
+    // Ensure proper display on component initialization
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
   }
 
   loadProfile(): void {
@@ -93,6 +98,31 @@ export class StudentProfileComponent implements OnInit {
   }
 
  goToChangePassword(): void {
-  this.router.navigate(['/student-change-password/']);
-}
+  this.router.navigate(['/student-change-password']);
+ }
+
+ onViewChanged(view: string): void {
+   // Handle view changes from sidebar
+   console.log('View changed to:', view);
+   
+   // Ensure proper display when navigating
+   setTimeout(() => {
+     window.scrollTo(0, 0);
+   }, 50);
+   
+   // Navigate based on the view
+   switch (view) {
+     case 'dashboard':
+       this.router.navigate(['/student-dashboard']);
+       break;
+     case 'facilities':
+     case 'equipment':
+     case 'requests':
+       this.router.navigate(['/student-dashboard']);
+       break;
+     case 'settings':
+       // Already on settings/profile, no need to navigate
+       break;
+   }
+ }
 }

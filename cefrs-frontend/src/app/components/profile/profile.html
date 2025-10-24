@@ -1,9 +1,15 @@
-<div class="profile-container">
-  <h1 class="page-title">Personal Data</h1>
+<div class="profile-layout">
+  <app-sidebar currentView="settings" (viewChanged)="onViewChanged($event)"></app-sidebar>
+  
+  <div class="main-content">
+    <div class="profile-container">
+      <div class="nav-header">
+        <h1 class="page-title">Personal Data</h1>
+      </div>
 
-  @if (loading) {
-    <p>Loading profile...</p>
-  } @else {
+      @if (loading) {
+        <p>Loading profile...</p>
+      } @else {
     <div class="profile-card">
       <h2 class="user-header">
         {{ user?.lastName | uppercase }}, {{ user?.firstName | uppercase }}
@@ -98,5 +104,6 @@
         }
       </form>
     </div>
-  }
+    }
+  </div>
 </div>
