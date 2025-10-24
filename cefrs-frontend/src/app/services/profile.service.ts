@@ -1,18 +1,67 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class ProfileService {
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:8080/api/users';
   private apiUrl = 'http://localhost:8080/api/user';
 
   constructor(private http: HttpClient) { }
 
   getProfile(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/profile`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get(`${this.apiUrl}/users/profile`, { headers });
   }
 
   updateProfile(data: any): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/update`, data);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.patch(`${this.apiUrl}/users/update`, data, { headers });
+  }
+
+  /**
+   * Change user password
+   * @param userId - User ID
+   * @param currentPassword - Current password for verification
+   * @param newPassword - New password to set
+   */
+  changePassword(userId: number, currentPassword: string, newPassword: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const payload = {
+      currentPassword,
+      newPassword
+    };
+
+    return this.http.post(`${this.apiUrl}/users/${userId}/change-password`, payload, { headers });
+  }
+
+  uploadProfileImage(userId: number, file: File): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(`${this.apiUrl}/users/${userId}/upload-image`, formData, { headers });
   }
 }

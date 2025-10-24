@@ -5,6 +5,7 @@ import { OrgLoginComponent } from './components/org-login/org-login';
 import { RegisterComponent } from './components/register/register';
 import { DashboardComponent } from './components/dashboard/dashboard';
 import { ProfileComponent } from './components/profile/profile';
+import { ChangePasswordComponent } from './components/student-change-password/student-change-password';
 
 // Import the student-specific components and the guard
 import { StudentDashboard } from './components/dashboard/student-dashboard/student-dashboard';

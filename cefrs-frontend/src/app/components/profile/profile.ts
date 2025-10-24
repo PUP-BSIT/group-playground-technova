@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   alertMessage = '';
   profileImageUrl: string | null = null;
   isLoading = false;
+  isSettingsOpen = false; // For dropdown toggle
 
   ngOnInit(): void {
     this.initializeForm();
@@ -131,6 +132,22 @@ export class ProfileComponent implements OnInit {
       reader.readAsDataURL(file);
     };
     fileInput.click();
+  }
+
+  /** Toggle Settings Dropdown */
+  toggleSettingsDropdown(): void {
+    this.isSettingsOpen = !this.isSettingsOpen;
+  }
+
+  /** Navigate to Edit Profile (current page - just close dropdown) */
+  goToEditProfile(): void {
+    this.isSettingsOpen = false;
+  }
+
+  /** Navigate to Change Password */
+  goToChangePassword(): void {
+    this.isSettingsOpen = false;
+    this.router.navigate(['/student-change-password']);
   }
 
   /** Navigation */
