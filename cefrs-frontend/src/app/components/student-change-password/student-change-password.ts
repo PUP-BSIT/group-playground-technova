@@ -126,13 +126,13 @@ export class ChangePasswordComponent implements OnInit {
     this.isLoading = true;
     this.alertMessage = '';
 
-    this.profileService.updateProfile(this.studentId, updateData).subscribe({
+    this.profileService.updateProfile(updateData).subscribe({
       next: () => {
         this.isLoading = false;
         this.alertMessage = 'Password changed successfully!';
         this.alertType = 'success';
         this.passwordForm.reset();
-        
+
         // Redirect to profile after 2 seconds
         setTimeout(() => {
           this.router.navigate(['/profile']);
@@ -142,7 +142,7 @@ export class ChangePasswordComponent implements OnInit {
         console.error('Password change failed:', err);
         this.isLoading = false;
         this.alertType = 'error';
-        
+
         // Handle specific error messages
         if (err.status === 401) {
           this.alertMessage = 'Current password is incorrect.';
