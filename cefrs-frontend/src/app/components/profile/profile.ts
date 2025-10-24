@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
   alertMessage = '';
   profileImageUrl: string | null = null;
-  studentId = 0;
   isLoading = false;
 
   ngOnInit(): void {
@@ -50,11 +49,9 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    const userData = JSON.parse(storedUser);
-    this.studentId = userData.id;
     this.isLoading = true;
 
-    this.profileService.getProfile(this.studentId).subscribe({
+    this.profileService.getProfile().subscribe({
       next: (data: any) => {
         this.isLoading = false;
         this.profileForm.patchValue({
@@ -75,7 +72,7 @@ export class ProfileComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error loading profile:', err);
-        this.alertMessage = 'Failed to load profile.';
+        this.alertMessage = 'Failed to load profile. Please check if your Spring Boot backend is running.';
         this.isLoading = false;
       },
     });
@@ -91,6 +88,7 @@ export class ProfileComponent implements OnInit {
 
     const formData = this.profileForm.getRawValue();
 
+    // Data Transfer Object (DTO) for the update
     const updateData = {
       firstName: formData.firstName || '',
       lastName: formData.lastName || '',
@@ -102,7 +100,7 @@ export class ProfileComponent implements OnInit {
     };
 
     this.isLoading = true;
-    this.profileService.updateProfile(this.studentId, updateData).subscribe({
+    this.profileService.updateProfile(updateData).subscribe({
       next: () => {
         this.isLoading = false;
         this.alertMessage = 'Profile updated successfully!';

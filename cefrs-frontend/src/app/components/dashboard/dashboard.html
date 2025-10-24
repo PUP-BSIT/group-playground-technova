@@ -14,7 +14,7 @@
     <div class="student-info">
       <div class="avatar"></div>
       <div class="details">
-        <div class="name">John Doe</div>
+        <div class="name">{{ userName }}</div>
         <div class="email">yourstudent@example.com</div>
       </div>
       <div class="logout-icon" (click)="logout()" title="Logout">⇦</div>
@@ -26,7 +26,7 @@
     <h1>Dashboard</h1>
 
     <div class="welcome-banner">
-      <h2>Welcome back, John Doe!</h2>
+      <h2>Welcome back, {{ userName }}!</h2>
       <p>Track your reservations and equipment requests here</p>
     </div>
 

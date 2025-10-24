@@ -4,17 +4,15 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
-  private apiUrl = 'http://localhost:8080/api/users';
+  private apiUrl = 'http://localhost:8080/api/user';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getProfile(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${userId}`);
+  getProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile`);
   }
 
-  updateProfile(userId: number, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${userId}`, data);
+  updateProfile(data: any): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/update`, data);
   }
-
 }
-

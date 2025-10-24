@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth'; // Adjust path if necessary
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -84,6 +84,10 @@ export class LoginComponent implements OnInit {
   onForgotPassword(event: Event): void {
     event.preventDefault();
     this.errorMessage = 'Forgot password functionality coming soon!';
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/student-dashboard/student-dashboard']);
   }
 
   goToRegister(): void {
