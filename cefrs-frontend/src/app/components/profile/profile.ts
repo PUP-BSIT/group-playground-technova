@@ -92,7 +92,7 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
-  navigateToChangePassword(): void {
-    this.router.navigate(['/student-change-password']);
-  }
+ goToChangePassword(): void {
+  this.router.navigate(['/student-change-password/']);
+}
 }

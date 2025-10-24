@@ -36,5 +36,6 @@ export const routes: Routes = [
 
   // Optional: Keep old standalone profile routes
   { path: 'profile', component: StudentProfileComponent, canActivate: [AuthGuard] },
-  { path: 'change-password', component: StudentChangePasswordComponent, canActivate: [AuthGuard] }
+  { path: 'change-password', component: StudentChangePasswordComponent, canActivate: [AuthGuard] },
+  { path: 'student-change-password', component: StudentChangePasswordComponent },
 ];
