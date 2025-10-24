@@ -6,11 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProfileService {
-  private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/users';
-  private apiUrl = 'http://localhost:8080/api/user';
 
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:8080/api/user';
 
   getProfile(): Observable<any> {
     const token = localStorage.getItem('token');
@@ -19,7 +17,7 @@ export class ProfileService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.get(`${this.apiUrl}/users/profile`, { headers });
+    return this.http.get(`${this.apiUrl}/profile`, { headers });
   }
 
   updateProfile(data: any): Observable<any> {
@@ -29,7 +27,7 @@ export class ProfileService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.patch(`${this.apiUrl}/users/update`, data, { headers });
+    return this.http.patch(`${this.apiUrl}/update`, data, { headers });
   }
 
   /**
@@ -50,7 +48,7 @@ export class ProfileService {
       newPassword
     };
 
-    return this.http.post(`${this.apiUrl}/users/${userId}/change-password`, payload, { headers });
+    return this.http.post(`${this.apiUrl}/${userId}/change-password`, payload, { headers });
   }
 
   uploadProfileImage(userId: number, file: File): Observable<any> {
@@ -62,6 +60,6 @@ export class ProfileService {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(`${this.apiUrl}/users/${userId}/upload-image`, formData, { headers });
+    return this.http.post(`${this.apiUrl}/${userId}/upload-image`, formData, { headers });
   }
 }
