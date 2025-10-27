@@ -72,23 +72,60 @@ select {
   }
 
   .btn {
-    display: block;
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 14px 0;
+    padding: 20px 24px;
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: $font-md;
     font-weight: 500;
     cursor: pointer;
     margin-bottom: 18px;
-    transition: background $transition-base;
+    transition: all $transition-base;
+    text-align: left;
+    gap: 16px;
+
+    .btn-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .btn-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .btn-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .btn-description {
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0.9;
+      text-align: center;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
 
     &.student {
       background: $student-color;
 
       &:hover {
-        background: darken($student-color, 10%);
+        background: darken($student-color, 5%);
       }
     }
 
@@ -96,7 +133,7 @@ select {
       background: $organization-color;
 
       &:hover {
-        background: darken($organization-color, 8%);
+        background: darken($organization-color, 5%);
       }
     }
   }
