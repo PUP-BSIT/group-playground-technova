@@ -52,6 +52,13 @@ export class RegisterComponent implements OnInit {
       const roleFromUrl = params['role'];
 
       if (roleFromUrl) {
+        // Redirect to org-register if user selected ORGANIZATION
+        if (roleFromUrl === 'ORGANIZATION') {
+          console.log('Redirecting to org-register');
+          this.router.navigate(['/org-register']);
+          return;
+        }
+        
         // Assign the role to the formData object which is used in submitForm()
         this.formData.role = roleFromUrl;
         console.log('Successfully set role from URL:', this.formData.role);
@@ -139,7 +146,7 @@ export class RegisterComponent implements OnInit {
       phoneNumber: this.formData.phone,
       password: this.formData.password,
       role: this.formData.role,
-      organizationName: this.formData.address || 'Computer Society' // Default value if address is empty
+      organizationName: 'Computer Society' // Default for students
     };
 
     console.log('Sending registration data:', registerData);

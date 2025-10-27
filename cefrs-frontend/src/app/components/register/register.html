@@ -148,7 +148,7 @@
         />
       </div>
 
-      <div class="form-actions">
+      <div class="form-actions single-action">
         <button class="btn-next" (click)="nextStep()">Next</button>
       </div>
     </div>
@@ -191,8 +191,9 @@
         />
       </div>
 
-      <div class="form-actions">
-        <button class="btn-next" (click)="nextStep()">Next</button>
+      <div class="form-actions multiple-actions">
+        <button type="button" class="btn-prev" (click)="previousStep()">Previous</button>
+        <button type="button" class="btn-next" (click)="nextStep()">Next</button>
       </div>
     </div>
 
@@ -250,8 +251,9 @@
         <p class="error-message">{{ errorMessage }}</p>
       </div>
 
-      <div class="form-actions">
-        <button class="btn-submit" (click)="submitForm()" [disabled]="isLoading">
+      <div class="form-actions multiple-actions">
+        <button type="button" class="btn-prev" (click)="previousStep()">Previous</button>
+        <button type="button" class="btn-submit" (click)="submitForm()" [disabled]="isLoading">
           {{ isLoading ? 'Submitting...' : 'Submit' }}
         </button>
       </div>
