@@ -69,7 +69,7 @@ export class SidebarComponent implements OnInit {
     // Reset user data
     this.user = null;
     
-    // Navigate to login
-    this.router.navigate(['/login']);
+    // Navigate to role selection
+    this.router.navigate(['./role-selection']);
   }
 }
