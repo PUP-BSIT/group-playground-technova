@@ -1,517 +1,624 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+// VARIABLES
+
+// Colors
+$primary-maroon: #6d1818;
+$primary-maroon-dark: #4a0f0f;
+$primary-orange: #f38b04;
+$primary-orange-dark: #d35400;
+
+$status-approved: #27ae60;
+$status-pending: #f1c40f;
+$status-rejected: #e74c3c;
+$status-returned: #3498db;
+$status-available: #27ae60;
+$status-reserved: #e74c3c;
+
+$badge-blue: #3498db;
+
+$text-primary: #333;
+$text-secondary: #666;
+$text-tertiary: #999;
+$text-white: white;
+
+$bg-primary: #f8f7f2;
+$bg-white: white;
+$bg-cream: #fffacd;
+
+$border-light: #e0e0e0;
+$border-medium: #ddd;
+
+// Typography
+$font-family: 'Roboto', sans-serif;
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$font-size-xs: 12px;
+$font-size-sm: 13px;
+$font-size-base: 14px;
+$font-size-md: 15px;
+$font-size-lg: 16px;
+$font-size-xl: 18px;
+$font-size-2xl: 22px;
+$font-size-3xl: 24px;
+$font-size-4xl: 28px;
+$font-size-5xl: 32px;
+$font-size-6xl: 36px;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+$spacing-2xl: 24px;
+$spacing-3xl: 28px;
+$spacing-4xl: 32px;
+$spacing-5xl: 48px;
+
+// Layout
+$sidebar-width: 280px;
+$sidebar-width-container: 271px;
+$sidebar-width-mobile: 240px;
+
+// Border Radius
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-full: 50%;
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+// Transitions
+$transition-fast: 0.2s;
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background: #f5f5f5;
+  font-family: $font-family;
+  background: $bg-primary;
 }
 
 .dashboard-container {
-    display: flex;
-    min-height: 100vh;
+  display: flex;
+  min-height: 100vh;
+  background-color: $bg-primary;
 }
 
-// Main Content Styles
 .main-content {
-    margin-left: 280px;
-    flex: 1;
-    padding: 0;
+  margin-left: $sidebar-width-container;
+  flex: 1;
+  padding: 0;
 }
 
 .page-header {
-    background: white;
-    padding: 32px 48px;
-    border-bottom: 1px solid #e0e0e0;
+  padding: $spacing-4xl $spacing-5xl;
+  border-bottom: 1px solid $border-light;
 
-    h1 {
-        font-size: 32px;
-        font-weight: 500;
-        margin-bottom: 4px;
-    }
+  h1 {
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-xs;
+    font-family: $font-family;
+  }
 }
 
 .page-subtitle {
-    color: #666;
-    font-size: 16px;
-    margin-top: 8px;
+  color: $text-secondary;
+  font-size: $font-size-lg;
+  margin-top: $spacing-sm;
+  font-family: $font-family;
 }
 
 .welcome-banner {
-    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
-    color: white;
-    padding: 32px 48px;
+  background: linear-gradient(135deg, $primary-maroon 0%, $primary-orange 100%);
+  color: $text-white;
+  padding: $spacing-4xl $spacing-5xl;
 
-    h2 {
-        font-size: 28px;
-        font-weight: 500;
-        margin-bottom: 8px;
-    }
+  h2 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-sm;
+    font-family: $font-family;
+  }
 
-    p {
-        font-size: 16px;
-        opacity: 0.95;
-    }
+  p {
+    font-size: $font-size-lg;
+    opacity: 0.95;
+    font-family: $font-family;
+  }
 }
 
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    padding: 32px 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-2xl;
+  padding: $spacing-4xl $spacing-5xl;
 }
 
 .stat-card {
-    background: white;
-    padding: 28px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  background: $bg-white;
+  padding: $spacing-3xl;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  text-align: center;
 }
 
 .stat-label {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 12px;
-    font-weight: 500;
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-md;
+  font-weight: $font-weight-medium;
+  font-family: $font-family;
 }
 
 .stat-value {
-    font-size: 36px;
-    font-weight: 700;
-    color: #333;
+  font-size: $font-size-6xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  font-family: $font-family;
 }
 
 .recent-section {
-    padding: 0 48px 48px;
+  background-color: $bg-white;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 0 $spacing-5xl $spacing-5xl;
 }
 
 .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $spacing-lg;
+  margin-bottom: $spacing-2xl;
 
-    h3 {
-        font-size: 22px;
-        font-weight: 500;
-    }
+  h3 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-medium;
+    font-family: $font-family;
+  }
 }
 
 .see-all-btn {
-    background: none;
-    border: none;
-    color: #666;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+  background: none;
+  border: none;
+  color: $text-secondary;
+  font-size: $font-size-base;
+  cursor: pointer;
+  font-family: $font-family;
 
-    &:hover {
-        color: #333;
-    }
+  &:hover {
+    color: $text-primary;
+  }
 }
 
 .requests-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
 }
 
 .request-item {
-    background: white;
-    padding: 20px 24px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: $bg-primary;
+  padding: $spacing-xl $spacing-2xl;
+  border-radius: $radius-lg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: $shadow-sm;
 }
 
 .request-info {
-    flex: 1;
+  flex: 1;
 }
 
 .request-title {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 4px;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  margin-bottom: $spacing-xs;
+  font-family: $font-family;
 }
 
 .request-meta {
-    font-size: 13px;
-    color: #666;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  font-family: $font-family;
 }
 
 .status-badge {
-    padding: 6px 16px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 500;
+  padding: 6px $spacing-lg;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  font-family: $font-family;
 
-    &.status-approved {
-        background: #27ae60;
-        color: white;
-    }
+  &.status-approved {
+    background: $status-approved;
+    color: $text-white;
+  }
 
-    &.status-pending {
-        background: #f1c40f;
-        color: #333;
-    }
+  &.status-pending {
+    background: $status-pending;
+    color: $text-primary;
+  }
 
-    &.status-rejected {
-        background: #e74c3c;
-        color: white;
-    }
+  &.status-rejected {
+    background: $status-rejected;
+    color: $text-white;
+  }
 
-    &.status-returned {
-        background: #3498db;
-        color: white;
-    }
+  &.status-returned {
+    background: $status-returned;
+    color: $text-white;
+  }
 
-    &.status-available {
-        background: #27ae60;
-        color: white;
-    }
+  &.status-available {
+    background: $status-available;
+    color: $text-white;
+  }
 
-    &.status-reserved {
-        background: #e74c3c;
-        color: white;
-    }
+  &.status-reserved {
+    background: $status-reserved;
+    color: $text-white;
+  }
 }
 
-// Search and Filters
 .search-bar {
-    padding: 32px 48px 24px;
+  padding: $spacing-4xl $spacing-5xl $spacing-2xl;
 }
 
 .search-controls {
-    padding: 32px 48px 24px;
-    display: flex;
-    gap: 16px;
+  padding: $spacing-4xl $spacing-5xl $spacing-2xl;
+  display: flex;
+  gap: $spacing-lg;
 }
 
 .search-input {
-    flex: 1;
-    padding: 12px 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 15px;
-    font-family: 'Roboto', sans-serif;
+  flex: 1;
+  padding: $spacing-md $spacing-xl;
+  border: 1px solid $border-medium;
+  border-radius: $radius-sm;
+  font-size: $font-size-md;
+  font-family: $font-family;
 
-    &::placeholder {
-        color: #999;
-    }
+  &::placeholder {
+    color: $text-tertiary;
+  }
 
-    &:focus {
-        outline: none;
-        border-color: #6d1818;
-    }
+  &:focus {
+    outline: none;
+    border-color: $primary-maroon;
+  }
 }
 
 .filter-select {
-    padding: 12px 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 15px;
-    font-family: 'Roboto', sans-serif;
-    background: white;
-    cursor: pointer;
-    min-width: 180px;
+  padding: $spacing-md $spacing-xl;
+  border: 1px solid $border-medium;
+  border-radius: $radius-sm;
+  font-size: $font-size-md;
+  font-family: $font-family;
+  background: $bg-white;
+  cursor: pointer;
+  min-width: 180px;
 
-    &:focus {
-        outline: none;
-        border-color: #6d1818;
-    }
+  &:focus {
+    outline: none;
+    border-color: $primary-maroon;
+  }
 }
 
-// Facilities Grid
 .facilities-grid {
-    padding: 0 48px 48px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+  padding: 0 $spacing-5xl $spacing-5xl;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-2xl;
 }
 
 .facility-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: $bg-white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-md;
 }
 
 .facility-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
+  position: relative;
+  height: 200px;
+  overflow: hidden;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .facility-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  padding: 6px $spacing-md;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  font-family: $font-family;
 }
 
 .facility-content {
-    padding: 20px;
-    background: #fffacd;
+  padding: $spacing-xl;
+  background: $bg-cream;
 }
 
 .facility-name {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #333;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-sm;
+  color: $text-primary;
+  font-family: $font-family;
 }
 
 .facility-description {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 12px;
-    line-height: 1.5;
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-md;
+  line-height: 1.5;
+  font-family: $font-family;
 }
 
 .facility-capacity {
-    font-size: 13px;
-    color: #333;
-    margin-bottom: 16px;
-    font-weight: 500;
+  font-size: $font-size-sm;
+  color: $text-primary;
+  margin-bottom: $spacing-lg;
+  font-weight: $font-weight-medium;
+  font-family: $font-family;
 }
 
 .request-btn {
-    width: 100%;
-    padding: 12px;
-    background: white;
-    border: 2px solid #333;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-    transition: all 0.2s;
+  width: 100%;
+  padding: $spacing-md;
+  background: $bg-white;
+  border: 2px solid $text-primary;
+  border-radius: $radius-sm;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  font-family: $font-family;
+  transition: all $transition-fast;
 
-    &:hover:not(:disabled) {
-        background: #333;
-        color: white;
-    }
+  &:hover:not(:disabled) {
+    background: $text-primary;
+    color: $text-white;
+  }
 
-    &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
-// Equipment Grid
 .equipment-grid {
-    padding: 0 48px 48px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+  padding: 0 $spacing-5xl $spacing-5xl;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-2xl;
 }
 
 .equipment-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: $bg-white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-md;
 }
 
 .equipment-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-    background: #f5f5f5;
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: $bg-primary;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .category-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    background: #3498db;
-    color: white;
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  padding: 6px $spacing-md;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  background: $badge-blue;
+  color: $text-white;
+  font-family: $font-family;
 }
 
 .equipment-content {
-    padding: 20px;
-    background: #fffacd;
+  padding: $spacing-xl;
+  background: $bg-cream;
 }
 
 .equipment-name {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #333;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-sm;
+  color: $text-primary;
+  font-family: $font-family;
 }
 
 .equipment-description {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 12px;
-    line-height: 1.5;
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-md;
+  line-height: 1.5;
+  font-family: $font-family;
 }
 
 .equipment-availability {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+  font-size: $font-size-sm;
+  font-family: $font-family;
 
-    span:first-child {
-        color: #333;
-        font-weight: 500;
-    }
+  span:first-child {
+    color: $text-primary;
+    font-weight: $font-weight-medium;
+  }
 }
 
 .availability-badge {
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    background: #333;
-    color: white;
+  padding: $spacing-xs 10px;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  background: $text-primary;
+  color: $text-white;
+  font-family: $font-family;
 }
 
-// Requests Detail List
 .requests-detail-list {
-    padding: 0 48px 48px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  padding: 0 $spacing-5xl $spacing-5xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
 }
 
 .request-detail-card {
-    background: #fffacd;
-    border-radius: 8px;
-    padding: 24px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: $bg-cream;
+  border-radius: $radius-lg;
+  padding: $spacing-2xl;
+  box-shadow: $shadow-md;
 }
 
 .request-id {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 12px;
-    font-weight: 500;
+  font-size: $font-size-base;
+  color: $text-secondary;
+  margin-bottom: $spacing-md;
+  font-weight: $font-weight-medium;
+  font-family: $font-family;
 }
 
 .request-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-xl;
 
-    h3 {
-        font-size: 22px;
-        font-weight: 600;
-        color: #333;
-    }
+  h3 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    font-family: $font-family;
+  }
 }
 
 .request-badges {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: $spacing-sm;
 }
 
 .type-badge {
-    padding: 6px 14px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    background: white;
-    color: #333;
-    border: 1px solid #ddd;
+  padding: 6px 14px;
+  border-radius: $radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  background: $bg-white;
+  color: $text-primary;
+  border: 1px solid $border-medium;
+  font-family: $font-family;
 }
 
 .request-details {
-    background: white;
-    padding: 20px;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  background: $bg-white;
+  padding: $spacing-xl;
+  border-radius: $radius-md;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
 }
 
 .detail-row {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
+  font-size: $font-size-base;
+  color: $text-primary;
+  line-height: 1.6;
+  font-family: $font-family;
 
-    strong {
-        font-weight: 600;
-        margin-right: 8px;
-    }
+  strong {
+    font-weight: $font-weight-semibold;
+    margin-right: $spacing-sm;
+  }
 }
 
-// Responsive Design
-@media (max-width: 1400px) {
+.no-data-message {
+  padding: $spacing-4xl;
+  text-align: center;
+  color: $text-secondary;
+  font-size: $font-size-lg;
+  font-family: $font-family;
+}
 
-    .facilities-grid,
-    .equipment-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+@media (max-width: 1400px) {
+  .facilities-grid,
+  .equipment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 1024px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .facilities-grid,
-    .equipment-grid {
-        grid-template-columns: 1fr;
-    }
+  .facilities-grid,
+  .equipment-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
-    .main-content {
-        margin-left: 240px;
-    }
+  .main-content {
+    margin-left: $sidebar-width-mobile;
+  }
 
-    .page-header,
-    .welcome-banner,
-    .stats-grid,
-    .recent-section,
-    .search-bar,
-    .search-controls,
-    .facilities-grid,
-    .equipment-grid,
-    .requests-detail-list {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
+  .page-header,
+  .welcome-banner,
+  .stats-grid,
+  .recent-section,
+  .search-bar,
+  .search-controls,
+  .facilities-grid,
+  .equipment-grid,
+  .requests-detail-list {
+    padding-left: $spacing-2xl;
+    padding-right: $spacing-2xl;
+  }
 
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .search-controls {
-        flex-direction: column;
-    }
+  .search-controls {
+    flex-direction: column;
+  }
 
-    .filter-select {
-        width: 100%;
-    }
+  .filter-select {
+    width: 100%;
+  }
 }
