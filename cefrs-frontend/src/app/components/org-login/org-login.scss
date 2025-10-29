@@ -89,6 +89,39 @@ $radius: 20px;
         border-color: $primary;
       }
     }
+
+    .input-with-icon {
+      position: relative;
+      
+      input {
+        padding-right: 45px;
+      }
+      
+      .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        transition: color 0.3s ease;
+        
+        &:hover {
+          color: darken(#6b7280, 20%);
+        }
+        
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
   }
 
   .forgot-password {
