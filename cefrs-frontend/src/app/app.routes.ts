@@ -12,9 +12,11 @@ import { AuthGuard } from './guards/auth-guard';
 import { StudentProfileComponent } from './components/profile/profile';
 import { OrgProfileComponent } from './components/org-profile/org-profile';
 import { StudentChangePasswordComponent } from './components/student-change-password/student-change-password';
+import { OrgChangePasswordComponent } from './components/org-change-password/org-change-password';
 
 export const routes: Routes = [
   { path: '', component: RoleSelectionComponent },
+  { path: 'role-selection', redirectTo: '', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'org-login', component: OrgLoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -52,8 +54,8 @@ export const routes: Routes = [
     ]
   },
 
-  // Optional: Keep old standalone profile routes
   { path: 'profile', component: StudentProfileComponent, canActivate: [AuthGuard] },
   { path: 'change-password', component: StudentChangePasswordComponent, canActivate: [AuthGuard] },
   { path: 'student-change-password', component: StudentChangePasswordComponent },
+  { path: 'org-change-password', component: OrgChangePasswordComponent, canActivate: [AuthGuard] },
 ];
