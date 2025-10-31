@@ -18,7 +18,6 @@ public class RegisterRequest {
     @Email
     private String email;
 
-    @NotBlank
     private String phoneNumber;
 
     @NotBlank
@@ -26,5 +25,7 @@ public class RegisterRequest {
 
     private String role;
 
-    private String organizationName;
+    private String address;
+
+    private String studentId;
 }
