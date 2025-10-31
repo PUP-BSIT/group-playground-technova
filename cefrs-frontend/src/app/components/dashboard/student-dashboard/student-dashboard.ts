@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth';
+import { AuditLogService, AuditLog } from '../../../services/audit-log.service';
 import { SidebarComponent } from '../../sidebar/sidebar';
 
 // --- INTERFACES ---
@@ -59,10 +60,14 @@ interface Equipment {
 })
 export class StudentDashboard implements OnInit {
   private authService = inject(AuthService);
+  private auditLogService = inject(AuditLogService);
   private router = inject(Router);
 
-  currentView: 'dashboard' | 'facilities' | 'equipment' | 'requests' | 'settings' = 'dashboard';
+  currentView: 'dashboard' | 'facilities' | 'equipment' | 'requests' | 'transactions' | 'settings' = 'dashboard';
   user: User | null = null;
+  
+  auditLogs: AuditLog[] = [];
+  isLoadingLogs = false;
 
   stats = {
     activeReservations: 3,
@@ -105,6 +110,21 @@ export class StudentDashboard implements OnInit {
 
   ngOnInit(): void {
     this.fetchUserProfile();
+    this.fetchAuditLogs();
+  }
+  
+  fetchAuditLogs(): void {
+    this.isLoadingLogs = true;
+    this.auditLogService.getMyAuditLogs().subscribe({
+      next: (logs) => {
+        this.auditLogs = logs;
+        this.isLoadingLogs = false;
+      },
+      error: (err) => {
+        console.error('Error fetching audit logs:', err);
+        this.isLoadingLogs = false;
+      }
+    });
   }
 
   fetchUserProfile(): void {
@@ -130,17 +150,22 @@ export class StudentDashboard implements OnInit {
     });
   }
 
-  setView(view: 'dashboard' | 'facilities' | 'equipment' | 'requests' | 'settings'): void {
+  setView(view: 'dashboard' | 'facilities' | 'equipment' | 'requests' | 'transactions' | 'settings'): void {
     this.currentView = view;
 
     // ✅ Route to profile when settings is clicked
     if (view === 'settings') {
       this.router.navigate(['/student-dashboard/settings/profile']);
     }
+    
+    // Refresh audit logs when transactions view is accessed
+    if (view === 'transactions') {
+      this.fetchAuditLogs();
+    }
   }
 
   onSidebarViewChange(view: string): void {
-    this.setView(view as 'dashboard' | 'facilities' | 'equipment' | 'requests' | 'settings');
+    this.setView(view as 'dashboard' | 'facilities' | 'equipment' | 'requests' | 'transactions' | 'settings');
   }
 
   getStatusClass(status: string): string {
