@@ -25,14 +25,14 @@ export class AuthGuard implements CanActivate {
     // 2. Role-Based Redirection Check (Only runs if logged in)
     const userRole = this.authService.getUserRole();
 
-    // Check if the user is a STUDENT and the current URL is '/dashboard' (the generic one)
+    // Check if the user is a STUDENT and the current URL is '/dashboard' (the overall one)
     if (userRole === 'STUDENT' && state.url === '/dashboard') {
       console.log('STUDENT detected. Redirecting to student-dashboard.');
       this.router.navigate(['/student-dashboard']);
-      return false; // Stop navigation to the generic dashboard
+      return false; // Stop navigation to the overall dashboard
     }
 
-    // For all other cases (Admin on /dashboard, Student on /student-dashboard, etc.), grant access.
+    // For all other cases (Admin on /dashboard, Student on /student-dashboard), this grant access.
     console.log(`Access granted for role ${userRole} to:`, state.url);
     return true;
   }

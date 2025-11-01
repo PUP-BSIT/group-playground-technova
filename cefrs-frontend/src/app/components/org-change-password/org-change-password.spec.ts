@@ -1,18 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrgChangePassword } from './org-change-password';
+import { OrgDashboardComponent } from '../org-dashboard/org-dashboard';
+import { provideHttpClient } from '@angular/common/http';
 
-describe('OrgChangePassword', () => {
-  let component: OrgChangePassword;
-  let fixture: ComponentFixture<OrgChangePassword>;
+describe('OrgDashboard', () => {
+  let component: OrgDashboardComponent;
+  let fixture: ComponentFixture<OrgDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrgChangePassword]
+      imports: [OrgDashboardComponent],
+      providers: [provideHttpClient()]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(OrgChangePassword);
+    fixture = TestBed.createComponent(OrgDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
