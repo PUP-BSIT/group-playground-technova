@@ -151,16 +151,16 @@ public class AuthService {
 
         // Update user profile
         public UserResponse updateUserProfile(Long userId, UpdateProfileRequest request) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                User user = userRepository.findById(userId)
+                                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Only update the fields that are allowed to change
-        user.setPhoneNumber(request.getPhoneNumber());
-        user.setEmail(request.getEmail());
-        user.setAddress(request.getAddress());
-        user.setUpdatedAt(LocalDateTime.now());
+                // Only update the fields that are allowed to change
+                user.setPhoneNumber(request.getPhoneNumber());
+                user.setEmail(request.getEmail());
+                user.setAddress(request.getAddress());
+                user.setUpdatedAt(LocalDateTime.now());
 
-        userRepository.save(user);
-        return new UserResponse(user);
+                userRepository.save(user);
+                return new UserResponse(user);
         }
 }

@@ -15,10 +15,10 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-    
+
     @Autowired
     private AuthService authService;
-    
+
     @GetMapping("/profile")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> getUserProfile(Authentication authentication) {
@@ -30,11 +30,11 @@ public class UserController {
             return ResponseEntity.badRequest().body("Error fetching profile: " + e.getMessage());
         }
     }
-    
+
     @PatchMapping("/update")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<?> updateUserProfile(Authentication authentication, 
-                                               @Valid @RequestBody UpdateProfileRequest request) {
+    public ResponseEntity<?> updateUserProfile(Authentication authentication,
+            @Valid @RequestBody UpdateProfileRequest request) {
         try {
             Long userId = (Long) authentication.getPrincipal();
             UserResponse user = authService.updateUserProfile(userId, request);
