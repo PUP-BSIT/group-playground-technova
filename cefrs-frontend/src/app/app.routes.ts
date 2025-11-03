@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login';
 import { OrgLoginComponent } from './components/org-login/org-login';
 import { AdminLogin } from './components/admin/login/admin-login';
 import { RegisterComponent } from './components/register/register';
+import { AdminRegister } from './components/admin/admin-register/admin-register';
 import { OrgRegisterComponent } from './components/org-register/org-register';
 import { DashboardComponent } from './components/dashboard/dashboard';
 import { StudentDashboard } from './components/dashboard/student-dashboard/student-dashboard';
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'admin-login', component: AdminLogin },
   { path: 'register', component: RegisterComponent },
   { path: 'org-register', component: OrgRegisterComponent },
+  { path: 'admin-register', component: AdminRegister },
 
   // Admin / Org Dashboard (Protected)
   {
