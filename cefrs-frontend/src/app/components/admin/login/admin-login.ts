@@ -81,4 +81,8 @@ export class AdminLogin {
     event.preventDefault();
     this.errorMessage = 'Forgot password feature coming soon!';
   }
+
+  goToRegister() {
+    this.router.navigate(['/admin-register']);
+  }
 }
