@@ -178,6 +178,6 @@ export class RegisterComponent implements OnInit {
   }
 
   goToDashboard() {
-    this.router.navigate(['/student-dashboard/student-dashboard']);
+    this.router.navigate(['/student-dashboard']);
   }
 }

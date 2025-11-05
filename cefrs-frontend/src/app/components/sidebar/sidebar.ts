@@ -2,6 +2,7 @@ import { Component, OnInit, inject, Input, Output, EventEmitter } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../services/profile.service';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,6 +14,7 @@ import { ProfileService } from '../../services/profile.service';
 export class SidebarComponent implements OnInit {
   private router = inject(Router);
   private profileService = inject(ProfileService);
+  private authService = inject(AuthService);
 
   @Input() currentView: string = 'dashboard';
   @Output() viewChanged = new EventEmitter<string>();
@@ -29,10 +31,21 @@ export class SidebarComponent implements OnInit {
     this.profileService.getProfile().subscribe({
       next: (data: any) => {
         this.isLoading = false;
-        // For organizations, show organizationName; for others, show firstName + lastName
-        const displayName = data.organizationName 
-          ? data.organizationName 
-          : (data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : data.email || 'User');
+        // Check user role to determine what to display
+        const userRole = this.authService.getUserRole();
+        
+        // Only show organizationName for CAMPUS_ORGANIZATION role
+        // For students, always show firstName + lastName
+        let displayName: string;
+        if (userRole === 'CAMPUS_ORGANIZATION' && data.organizationName) {
+          displayName = data.organizationName;
+        } else {
+          // For students and other roles, show firstName + lastName
+          displayName = data.firstName && data.lastName 
+            ? `${data.firstName} ${data.lastName}` 
+            : data.email || 'User';
+        }
+        
         this.user = {
           name: displayName,
           email: data.email || 'user@example.com',
