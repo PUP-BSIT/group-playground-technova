@@ -61,7 +61,7 @@ export class AdminLogin {
         const role = this.authService.getUserRole();
         // Only allow ADMIN role users
         if (role === 'ADMIN') {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/admin-dashboard']);
         } else {
           this.errorMessage = `Access denied. This login is for administrators only. You are logged in as ${role}.`;
           this.authService.logout();

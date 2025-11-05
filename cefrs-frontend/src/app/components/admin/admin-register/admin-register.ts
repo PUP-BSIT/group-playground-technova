@@ -109,7 +109,7 @@ export class AdminRegister {
   }
 
   goToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/admin-dashboard']);
   }
 
   isFieldInvalid(fieldName: string): boolean {

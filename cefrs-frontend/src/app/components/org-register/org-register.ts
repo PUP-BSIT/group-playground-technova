@@ -164,7 +164,7 @@ export class OrgRegisterComponent implements OnInit {
   }
 
   goToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/org-dashboard']);
   }
 
   // Helper methods to check field validity

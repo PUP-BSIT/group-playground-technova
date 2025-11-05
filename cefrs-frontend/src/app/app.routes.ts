@@ -6,9 +6,9 @@ import { AdminLogin } from './components/admin/login/admin-login';
 import { RegisterComponent } from './components/register/register';
 import { AdminRegister } from './components/admin/admin-register/admin-register';
 import { OrgRegisterComponent } from './components/org-register/org-register';
-import { DashboardComponent } from './components/dashboard/dashboard';
 import { StudentDashboard } from './components/dashboard/student-dashboard/student-dashboard';
 import { OrgDashboardComponent } from './components/org-dashboard/org-dashboard';
+import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboard';
 import { AuthGuard } from './guards/auth-guard';
 
 import { StudentProfileComponent } from './components/profile/profile';
@@ -26,10 +26,10 @@ export const routes: Routes = [
   { path: 'org-register', component: OrgRegisterComponent },
   { path: 'admin-register', component: AdminRegister },
 
-  // Admin / Org Dashboard (Protected)
+  // Admin Dashboard (Protected)
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'admin-dashboard',
+    component: AdminDashboard,
     canActivate: [AuthGuard]
   },
   
