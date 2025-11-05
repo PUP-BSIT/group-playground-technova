@@ -5,7 +5,7 @@ public enum RoleType {
     CAMPUS_ORGANIZATION("Submit requests for facilities, manage organization reservations"),
     ADMIN("Approve/decline requests, manage availability, view reports"),
     SUPER_ADMIN("Manage users, configure policies, handle backups");
-    
+
     private final String description;
     
     RoleType(String description) {
