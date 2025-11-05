@@ -28,4 +28,6 @@ public class RegisterRequest {
     private String address;
 
     private String studentId;
+
+    private String organizationName;
 }
