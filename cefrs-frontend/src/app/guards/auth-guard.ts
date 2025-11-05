@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
       console.log('ORGANIZATION detected. Redirecting to org-dashboard.');
       this.router.navigate(['/org-dashboard']);
       return false;
-    } else if ((userRole === 'ADMIN' || userRole === 'SUPER_ADMIN') && state.url === '/dashboard') {
+    } else if ((userRole === 'ADMIN' || userRole === 'ADMINISTRATOR' || userRole === 'SUPER_ADMIN') && state.url === '/dashboard') {
       console.log('ADMIN detected. Redirecting to admin-dashboard.');
       this.router.navigate(['/admin-dashboard']);
       return false;
