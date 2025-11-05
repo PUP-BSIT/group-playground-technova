@@ -18,4 +18,6 @@ public class UpdateProfileRequest {
 
     @NotBlank(message = "Address is required")
     private String address;
+
+    private String studentId;
 }

@@ -72,6 +72,7 @@ public class AuthService {
                 user.setPhoneNumber(request.getPhoneNumber());
 
                 user.setAddress(request.getAddress());
+                user.setStudentId(request.getStudentId());
 
                 // Student ID: Set the student ID from the DTO
                 user.setStudentId(request.getStudentId());
