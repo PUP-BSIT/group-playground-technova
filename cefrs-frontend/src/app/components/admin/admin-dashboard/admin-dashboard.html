@@ -49,5 +49,6 @@
     <app-facilities *ngIf="currentView === 'facilities'"></app-facilities>
     <app-equipment *ngIf="currentView === 'equipment'"></app-equipment>
     <app-report-logs *ngIf="currentView === 'report-logs'"></app-report-logs>
+    <router-outlet *ngIf="currentView === 'settings'"></router-outlet>
   </main>
 </div>
