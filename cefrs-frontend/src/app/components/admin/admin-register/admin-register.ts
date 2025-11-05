@@ -93,7 +93,7 @@ export class AdminRegister {
       email: this.registerForm.value.email,
       phoneNumber: this.registerForm.value.phoneNumber,
       password: this.registerForm.value.password,
-      role: 'ADMIN'
+      role: 'ADMINISTRATOR'
     };
 
     this.authService.register(registerData).subscribe({
