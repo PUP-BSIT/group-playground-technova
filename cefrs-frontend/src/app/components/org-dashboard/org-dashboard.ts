@@ -129,7 +129,12 @@ export class OrgDashboardComponent implements OnInit {
   fetchUserProfile(): void {
     this.authService.getUserProfile().subscribe({
       next: (profile) => {
+        console.log('Fetched user profile:', profile);
+        console.log('Organization Name:', profile.organizationName);
         this.user = profile;
+        if (!this.user.organizationName) {
+          console.warn('Organization name is missing from profile!');
+        }
       },
       error: (err) => {
         console.error('Error fetching user profile:', err);

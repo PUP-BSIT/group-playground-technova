@@ -29,8 +29,12 @@ export class SidebarComponent implements OnInit {
     this.profileService.getProfile().subscribe({
       next: (data: any) => {
         this.isLoading = false;
+        // For organizations, show organizationName; for others, show firstName + lastName
+        const displayName = data.organizationName 
+          ? data.organizationName 
+          : (data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : data.email || 'User');
         this.user = {
-          name: data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : data.email || 'User',
+          name: displayName,
           email: data.email || 'user@example.com',
           studentNumber: data.studentNumber
         };

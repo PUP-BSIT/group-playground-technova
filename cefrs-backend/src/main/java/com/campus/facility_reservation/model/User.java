@@ -36,6 +36,9 @@ public class User {
     @Column(name = "student_id", unique = true)
     private String studentId;
 
+    @Column(name = "organization_name")
+    private String organizationName;
+
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -121,6 +124,14 @@ public class User {
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 
     public LocalDateTime getCreatedAt() {
