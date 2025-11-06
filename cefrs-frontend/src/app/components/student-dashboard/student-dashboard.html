@@ -1,0 +1,34 @@
+<div class="dashboard-container">
+  <!-- Sidebar Component -->
+  <app-sidebar 
+    [currentView]="currentView" 
+    (viewChanged)="onSidebarViewChange($event)">
+  </app-sidebar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    @if (currentView === 'settings') {
+      <router-outlet></router-outlet>
+    }
+
+    @if (currentView === 'dashboard') {
+      <app-dashboard-view></app-dashboard-view>
+    }
+
+    @if (currentView === 'facilities') {
+      <app-facilities-view></app-facilities-view>
+    }
+
+    @if (currentView === 'equipment') {
+      <app-equipment-view></app-equipment-view>
+    }
+
+    @if (currentView === 'requests') {
+      <app-requests-view></app-requests-view>
+    }
+
+    @if (currentView === 'transactions') {
+      <app-transactions-view></app-transactions-view>
+    }
+  </main>
+</div>
