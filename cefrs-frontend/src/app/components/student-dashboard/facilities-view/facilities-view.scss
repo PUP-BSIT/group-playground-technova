@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+.page-header {
+  background: white;
+  padding: 32px 48px;
+  border-bottom: 1px solid #e0e0e0;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+}
+
+.page-subtitle {
+  color: #666;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.search-bar {
+  padding: 32px 48px 24px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+
+  &::placeholder {
+    color: #999;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #6d1818;
+  }
+}
+
+.facilities-grid {
+  padding: 0 48px 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.facility-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.facility-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.facility-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &.status-approved {
+    background: #27ae60;
+    color: white;
+  }
+
+  &.status-pending {
+    background: #f1c40f;
+    color: #333;
+  }
+
+  &.status-rejected {
+    background: #e74c3c;
+    color: white;
+  }
+
+  &.status-returned {
+    background: #3498db;
+    color: white;
+  }
+
+  &.status-available {
+    background: #27ae60;
+    color: white;
+  }
+
+  &.status-reserved {
+    background: #e74c3c;
+    color: white;
+  }
+}
+
+.facility-content {
+  padding: 20px;
+  background: #fffacd;
+}
+
+.facility-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.facility-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.facility-capacity {
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.request-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background: #333;
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 16px;
+}
+
+.loading-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 16px;
+  font-style: italic;
+}
+
+// Responsive Design
+@media (max-width: 1400px) {
+  .facilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .facilities-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header,
+  .search-bar,
+  .facilities-grid {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
