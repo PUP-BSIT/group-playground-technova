@@ -46,4 +46,62 @@ public interface FacilityReservationRepository extends JpaRepository<FacilityRes
     @Query("SELECT COUNT(fr) FROM FacilityReservation fr WHERE fr.user = :user " +
            "AND fr.status IN ('PENDING', 'APPROVED')")
     Long countActiveReservationsByUser(@Param("user") User user);
+
+    // For Reports Generation
+
+    // Total reservations count
+    @Query("SELECT COUNT(fr) FROM FacilityReservation fr")
+    Long countTotalReservations();
+
+    // Active reservations (APPROVED or PENDING)
+    @Query("SELECT COUNT(fr) FROM FacilityReservation fr WHERE fr.status IN ('APPROVED', 'PENDING')")
+    Long countActiveReservations();
+
+    // Completed reservations
+    @Query("SELECT COUNT(fr) FROM FacilityReservation fr WHERE fr.status = 'COMPLETED'")
+    Long countCompletedReservations();
+
+    // Daily reservation counts for chart (last 30 days)
+    @Query("SELECT fr.reservationDate as date, COUNT(fr) as count " +
+        "FROM FacilityReservation fr " +
+        "WHERE fr.reservationDate >= :startDate " +
+        "GROUP BY fr.reservationDate " +
+        "ORDER BY fr.reservationDate")
+    List<Object[]> getDailyReservationCounts(@Param("startDate") LocalDate startDate);
+
+    // Hourly activity (for peak hours analysis)
+    @Query("SELECT HOUR(fr.startTime) as hour, COUNT(fr) as count " +
+        "FROM FacilityReservation fr " +
+        "WHERE fr.status = 'APPROVED' " +
+        "GROUP BY HOUR(fr.startTime) " +
+        "ORDER BY count DESC")
+    List<Object[]> getHourlyActivity();
+
+    // Reservations by facility
+    @Query("SELECT f.id, f.name, f.type, COUNT(fr) as totalReservations, " +
+        "SUM(CASE WHEN fr.status = 'APPROVED' THEN 1 ELSE 0 END) as approved, " +
+        "SUM(CASE WHEN fr.status = 'PENDING' THEN 1 ELSE 0 END) as pending, " +
+        "SUM(CASE WHEN fr.status = 'REJECTED' THEN 1 ELSE 0 END) as rejected " +
+        "FROM FacilityReservation fr " +
+        "JOIN fr.facility f " +
+        "GROUP BY f.id, f.name, f.type " +
+        "ORDER BY totalReservations DESC")
+    List<Object[]> getFacilityUsageReport();
+
+    // User activity report
+    @Query("SELECT u.id, u.firstName, u.lastName, u.email, r.name, COUNT(fr), MAX(fr.createdAt) " +
+        "FROM FacilityReservation fr " +
+        "JOIN fr.user u " +
+        "JOIN u.role r " +
+        "GROUP BY u.id, u.firstName, u.lastName, u.email, r.name " +
+        "ORDER BY COUNT(fr) DESC")
+    List<Object[]> getUserActivityReport();
+
+    // Today's reservations
+    @Query("SELECT COUNT(fr) FROM FacilityReservation fr WHERE fr.reservationDate = :today")
+    Long countTodayReservations(@Param("today") LocalDate today);
+
+    // Unique users count
+    @Query("SELECT COUNT(DISTINCT fr.user.id) FROM FacilityReservation fr")
+    Long countUniqueUsers();
 }

@@ -44,4 +44,55 @@ public interface EquipmentBorrowingRepository extends JpaRepository<EquipmentBor
            "WHERE eb.equipment = :equipment " +
            "AND eb.status IN ('APPROVED', 'BORROWED')")
     Integer getTotalBorrowedQuantity(@Param("equipment") Equipment equipment);
+
+    // For Reports Generation
+
+    // Total borrowings count
+    @Query("SELECT COUNT(eb) FROM EquipmentBorrowing eb")
+    Long countTotalBorrowings();
+
+    // Active borrowings (APPROVED or BORROWED)
+    @Query("SELECT COUNT(eb) FROM EquipmentBorrowing eb WHERE eb.status IN ('APPROVED', 'BORROWED')")
+    Long countActiveBorrowings();
+
+    // Overdue items count
+    @Query("SELECT COUNT(eb) FROM EquipmentBorrowing eb " +
+          "WHERE eb.status = 'BORROWED' AND eb.expectedReturnDate < :today")
+    Long countOverdueItems(@Param("today") LocalDate today);
+
+    // Average borrowing duration in days
+    @Query("SELECT AVG(DATEDIFF(eb.actualReturnDate, eb.borrowDate)) " +
+          "FROM EquipmentBorrowing eb " +
+          "WHERE eb.actualReturnDate IS NOT NULL")
+    Double getAverageDurationInDays();
+
+    // Daily borrowing counts for chart (last 30 days)
+    @Query("SELECT eb.borrowDate as date, COUNT(eb) as count " +
+          "FROM EquipmentBorrowing eb " +
+          "WHERE eb.borrowDate >= :startDate " +
+          "GROUP BY eb.borrowDate " +
+          "ORDER BY eb.borrowDate")
+    List<Object[]> getDailyBorrowingCounts(@Param("startDate") LocalDate startDate);
+
+    // Equipment usage report
+    @Query("SELECT e.id, e.name, e.category, e.quantityTotal, e.quantityAvailable, COUNT(eb), " +
+          "SUM(CASE WHEN eb.status = 'OVERDUE' THEN 1 ELSE 0 END) " +
+          "FROM EquipmentBorrowing eb " +
+          "JOIN eb.equipment e " +
+          "GROUP BY e.id, e.name, e.category, e.quantityTotal, e.quantityAvailable " +
+          "ORDER BY COUNT(eb) DESC")
+    List<Object[]> getEquipmentUsageReport();
+
+    // User borrowing activity
+    @Query("SELECT u.id, u.firstName, u.lastName, u.email, r.name, COUNT(eb), MAX(eb.createdAt) " +
+          "FROM EquipmentBorrowing eb " +
+          "JOIN eb.user u " +
+          "JOIN u.role r " +
+          "GROUP BY u.id, u.firstName, u.lastName, u.email, r.name " +
+          "ORDER BY COUNT(eb) DESC")
+    List<Object[]> getUserBorrowingReport();
+
+    // Today's borrowings
+    @Query("SELECT COUNT(eb) FROM EquipmentBorrowing eb WHERE eb.borrowDate = :today")
+    Long countTodayBorrowings(@Param("today") LocalDate today);
 }
