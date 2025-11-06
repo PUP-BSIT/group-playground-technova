@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClient } from '@angular/common/http';
 import { AdminLogin } from './admin-login';
 
 describe('AdminLogin', () => {
@@ -8,9 +8,10 @@ describe('AdminLogin', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminLogin]
+      imports: [AdminLogin],
+      providers: [provideHttpClient()]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AdminLogin);
     component = fixture.componentInstance;
