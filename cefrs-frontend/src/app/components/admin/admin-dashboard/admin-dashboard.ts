@@ -11,6 +11,8 @@ import { Facilities } from './facilities/facilities';
 import { Equipment } from './equipment/equipment';
 import { ReportLogs } from './report-logs/report-logs';
 
+import { CalendarView } from '../admin-dashboard/calendar/calendar-view/calendar-view';
+
 interface NavItem {
   id: string;
   label: string;
@@ -22,23 +24,25 @@ interface NavItem {
   styleUrls: ['./admin-dashboard.scss'],
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule,
     RouterModule,
     DashboardView,
     ManageRequest,
     Facilities,
     Equipment,
-    ReportLogs
+    ReportLogs,
+    CalendarView
   ]
 })
 export class AdminDashboard {
   currentView: string = 'dashboard';
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   navItems: NavItem[] = [
     { id: 'dashboard', label: 'Dashboard' },
     { id: 'manage-request', label: 'Manage Request' },
+    { id: 'calendar', label: 'Calendar' },
     { id: 'facilities', label: 'Facilities' },
     { id: 'equipment', label: 'Equipment' },
     { id: 'report-logs', label: 'Report and Logs' },

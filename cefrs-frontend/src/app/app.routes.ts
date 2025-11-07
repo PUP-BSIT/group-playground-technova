@@ -12,6 +12,7 @@ import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboa
 import { AuthGuard } from './guards/auth-guard';
 import { AdminProfileComponent } from './components/admin/admin-profile/admin-profile';
 import { AdminChangePasswordComponent } from './components/admin/admin-change-password/admin-change-password';
+import { CalendarView } from './components/admin/admin-dashboard/calendar/calendar-view/calendar-view';
 
 import { StudentProfileComponent } from './components/profile/profile';
 import { OrgProfileComponent } from './components/org-profile/org-profile';
@@ -34,18 +35,19 @@ export const routes: Routes = [
     component: AdminDashboard,
     canActivate: [AuthGuard],
     children: [
+      { path: 'calendar', component: CalendarView },
       { path: 'settings/profile', component: AdminProfileComponent },
       { path: 'settings/change-password', component: AdminChangePasswordComponent }
     ]
   },
-  
+
   // Organization Dashboard (Protected)
   {
     path: 'org-dashboard',
     component: OrgDashboardComponent,
     canActivate: [AuthGuard]
   },
-  
+
   // Organization Profile (Protected)
   {
     path: 'org-profile',
