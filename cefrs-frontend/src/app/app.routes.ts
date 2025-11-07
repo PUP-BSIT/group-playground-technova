@@ -22,8 +22,8 @@ import { ReservationRequestComponent } from './components/reservation-request/re
 import { EquipmentBorrowingRequestComponent } from './components/equipment-borrowing-request/equipment-borrowing-request';
 import { MyReservationsComponent } from './components/my-reservations/my-reservations';
 import { MyBorrowingsComponent } from './components/my-borrowings/my-borrowings';
-import { ReservationApprovalComponent } from './components/admin/reservation-approval/reservation-approval';
-import { EquipmentApprovalComponent } from './components/admin/equipment-approval/equipment-approval';
+// import { ReservationApprovalComponent } from './components/admin/reservation-approval/reservation-approval';
+// import { EquipmentApprovalComponent } from './components/admin/equipment-approval/equipment-approval';
 
 export const routes: Routes = [
   { path: '', component: RoleSelectionComponent },
@@ -44,8 +44,8 @@ export const routes: Routes = [
       { path: 'calendar', component: CalendarView },
       { path: 'settings/profile', component: AdminProfileComponent },
       { path: 'settings/change-password', component: AdminChangePasswordComponent },
-      { path: 'reservations/approve', component: ReservationApprovalComponent },
-      { path: 'equipment/approve', component: EquipmentApprovalComponent }
+      // { path: 'reservations/approve', component: ReservationApprovalComponent },
+      // { path: 'equipment/approve', component: EquipmentApprovalComponent }
     ]
   },
 
