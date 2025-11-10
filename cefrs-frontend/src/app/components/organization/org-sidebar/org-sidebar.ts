@@ -16,7 +16,7 @@ export class OrgSidebarComponent implements OnInit {
   private profileService = inject(ProfileService);
   private authService = inject(AuthService);
 
-  @Input() currentView: string = 'dashboard';
+  @Input() currentView = 'dashboard';
   @Output() viewChanged = new EventEmitter<string>();
 
   user: any = null;

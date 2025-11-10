@@ -32,8 +32,7 @@
                 <input
                   type="text"
                   formControlName="phoneNumber"
-                  [class.invalid]="profileForm.get('phoneNumber')?.touched && profileForm.get('phoneNumber')?.invalid"
-                />
+                  [class.invalid]="profileForm.get('phoneNumber')?.touched && profileForm.get('phoneNumber')?.invalid" />
                 @if (profileForm.get('phoneNumber')?.touched && profileForm.get('phoneNumber')?.invalid) {
                   <small class="error">Enter a valid mobile number.</small>
                 }
@@ -44,8 +43,7 @@
                 <input
                   type="email"
                   formControlName="email"
-                  [class.invalid]="profileForm.get('email')?.touched && profileForm.get('email')?.invalid"
-                />
+                  [class.invalid]="profileForm.get('email')?.touched && profileForm.get('email')?.invalid" />
                 @if (profileForm.get('email')?.touched && profileForm.get('email')?.invalid) {
                   <small class="error">Enter a valid email.</small>
                 }
@@ -56,8 +54,7 @@
                 <input
                   type="text"
                   formControlName="address"
-                  [class.invalid]="profileForm.get('address')?.touched && profileForm.get('address')?.invalid"
-                />
+                  [class.invalid]="profileForm.get('address')?.touched && profileForm.get('address')?.invalid" />
                 @if (profileForm.get('address')?.touched && profileForm.get('address')?.invalid) {
                   <small class="error">Address is required.</small>
                 }
@@ -65,24 +62,24 @@
             </div>
 
             <div class="button-group">
-              <button
-                type="button"
-                class="edit-btn"
-                (click)="toggleEdit()"
-                *ngIf="!isEditing"
-              >
-                Edit Profile
-              </button>
+              @if (!isEditing) {
+                <button
+                  type="button"
+                  class="edit-btn"
+                  (click)="toggleEdit()">
+                  Edit Profile
+                </button>
+              }
 
-              <button
-                type="button"
-                class="save-btn"
-                (click)="saveProfile()"
-                *ngIf="isEditing"
-                [disabled]="profileForm.invalid"
-              >
-                Save Changes
-              </button>
+              @if (isEditing) {
+                <button
+                  type="button"
+                  class="save-btn"
+                  (click)="saveProfile()"
+                  [disabled]="profileForm.invalid">
+                  Save Changes
+                </button>
+              }
 
               <button
                 type="button"

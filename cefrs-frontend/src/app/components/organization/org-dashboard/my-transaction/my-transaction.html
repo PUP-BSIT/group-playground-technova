@@ -6,7 +6,8 @@
   <div class="search-controls">
     <input type="text" placeholder="Search transactions" [(ngModel)]="searchQuery" class="search-input">
   </div>
-  <div class="transactions-list" *ngIf="!isLoadingLogs">
+  @if (!isLoadingLogs) {
+    <div class="transactions-list">
     @for (log of filteredLogs; track log.logId) {
       <div class="transaction-card">
         <div class="transaction-header">
@@ -36,7 +37,8 @@
     } @empty {
       <div class="no-data-message">No transaction logs found.</div>
     }
-  </div>
+    </div>
+  }
   @if (isLoadingLogs) {
     <div class="loading-message">Loading transactions...</div>
   }

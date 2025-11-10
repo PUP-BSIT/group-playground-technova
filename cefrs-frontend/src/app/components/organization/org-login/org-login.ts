@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,15 +12,13 @@ import { AuthService } from '../../../services/auth';
   styleUrls: ['./org-login.scss']
 })
 export class OrgLoginComponent {
-  credentials = { email: '', password: '' };
-  showPassword: boolean = false;
-  isLoading: boolean = false;
-  errorMessage: string = '';
+  private router = inject(Router);
+  private authService = inject(AuthService);
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) { }
+  credentials = { email: '', password: '' };
+  showPassword = false;
+  isLoading = false;
+  errorMessage = '';
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
