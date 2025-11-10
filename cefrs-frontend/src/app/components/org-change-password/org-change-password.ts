@@ -4,12 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractContro
 import { ProfileService } from '../../services/profile.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SidebarComponent } from '../sidebar/sidebar';
+import { OrgSidebarComponent } from '../org-sidebar/org-sidebar';
 
 @Component({
   selector: 'app-org-change-password',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
+  imports: [CommonModule, ReactiveFormsModule, OrgSidebarComponent],
   templateUrl: './org-change-password.html',
   styleUrls: ['./org-change-password.scss']
 })

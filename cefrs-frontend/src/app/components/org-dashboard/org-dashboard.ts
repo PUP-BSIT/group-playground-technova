@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth';
-import { SidebarComponent } from '../sidebar/sidebar';
+import { OrgSidebarComponent } from '../org-sidebar/org-sidebar';
 import { OrgFacilitiesComponent } from './facilities/facilities';
 import { OrgEquipmentComponent } from './equipment/equipment';
 import { OrgMyRequestComponent } from './my-request/my-request';
@@ -40,7 +40,7 @@ interface Request {
     CommonModule,
     FormsModule,
     RouterModule,
-    SidebarComponent,
+    OrgSidebarComponent,
     OrgFacilitiesComponent,
     OrgEquipmentComponent,
     OrgMyRequestComponent,

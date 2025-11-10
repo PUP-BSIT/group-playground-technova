@@ -4,12 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ProfileService } from '../../services/profile.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SidebarComponent } from '../sidebar/sidebar';
+import { OrgSidebarComponent } from '../org-sidebar/org-sidebar';
 
 @Component({
   selector: 'app-org-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
+  imports: [CommonModule, ReactiveFormsModule, OrgSidebarComponent],
   templateUrl: './org-profile.html',
   styleUrls: ['./org-profile.scss']
 })
