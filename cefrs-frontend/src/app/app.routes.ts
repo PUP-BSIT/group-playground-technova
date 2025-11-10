@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { RoleSelectionComponent } from './components/role-selection/role-selection';
-import { LoginComponent } from './components/login/login';
-import { OrgLoginComponent } from './components/org-login/org-login';
+import { LoginComponent } from './components/student/login/login';
+import { OrgLoginComponent } from './components/organization/org-login/org-login';
 import { AdminLogin } from './components/admin/admin-login/admin-login';
-import { RegisterComponent } from './components/register/register';
+import { RegisterComponent } from './components/student/register/register';
 import { AdminRegister } from './components/admin/admin-register/admin-register';
 import { OrgRegisterComponent } from './components/organization/org-register/org-register';
 import { StudentDashboard } from './components/student/dashboard/student-dashboard';

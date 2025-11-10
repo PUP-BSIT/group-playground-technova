@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EquipmentService } from '../../../services/equipment.service';
-import { EquipmentBorrowingService, BorrowingRequest } from '../../../services/equipment-borrowing.service';
+import { EquipmentService } from '../../../../services/equipment.service';
+import { EquipmentBorrowingService, BorrowingRequest } from '../../../../services/equipment-borrowing.service';
 
 interface Equipment {
   id: number;
