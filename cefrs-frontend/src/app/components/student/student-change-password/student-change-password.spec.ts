@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StudentDashboard } from './student-dashboard';
+import { StudentChangePasswordComponent } from './student-change-password';
 import { provideHttpClient } from '@angular/common/http';
 
-describe('StudentDashboard', () => {
-  let component: StudentDashboard;
-  let fixture: ComponentFixture<StudentDashboard>;
+describe('StudentChangePassword', () => {
+  let component: StudentChangePasswordComponent;
+  let fixture: ComponentFixture<StudentChangePasswordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StudentDashboard],
+      imports: [StudentChangePasswordComponent],
       providers: [provideHttpClient()]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(StudentDashboard);
+    fixture = TestBed.createComponent(StudentChangePasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,3 +23,4 @@ describe('StudentDashboard', () => {
     expect(component).toBeTruthy();
   });
 });
+
