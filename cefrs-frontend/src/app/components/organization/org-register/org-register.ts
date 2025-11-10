@@ -29,14 +29,38 @@ export class OrgRegisterComponent implements OnInit {
   ) {
     // Initialize form with validation
     this.registerForm = this.fb.group({
-      organizationName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
-      address: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator]],
-      confirmPassword: ['', [Validators.required]]
+      organizationName: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required]
+      }),
+      firstName: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required]
+      }),
+      lastName: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required]
+      }),
+      email: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.email]
+      }),
+      phoneNumber: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern(/^[0-9]{11}$/)]
+      }),
+      address: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required]
+      }),
+      password: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.minLength(8), this.passwordValidator]
+      }),
+      confirmPassword: this.fb.control('', {
+        nonNullable: true,
+        validators: [Validators.required]
+      })
     }, { validators: this.passwordMatchValidator });
   }
 
