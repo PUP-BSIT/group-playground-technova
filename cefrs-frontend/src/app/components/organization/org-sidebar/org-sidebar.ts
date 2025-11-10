@@ -1,8 +1,8 @@
 import { Component, OnInit, inject, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProfileService } from '../../services/profile.service';
-import { AuthService } from '../../services/auth';
+import { ProfileService } from '../../../services/profile.service';
+import { AuthService } from '../../../services/auth';
 
 @Component({
   selector: 'app-org-sidebar',
