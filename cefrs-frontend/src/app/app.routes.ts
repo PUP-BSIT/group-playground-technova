@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import { RoleSelectionComponent } from './components/role-selection/role-selection';
-import { LoginComponent } from './components/login/login';
+import { LoginComponent } from './components/student/login/login';
 import { OrgLoginComponent } from './components/org-login/org-login';
 import { AdminLogin } from './components/admin/login/admin-login';
-import { RegisterComponent } from './components/register/register';
+import { RegisterComponent } from './components/student/register/register';
 import { AdminRegister } from './components/admin/admin-register/admin-register';
 import { OrgRegisterComponent } from './components/org-register/org-register';
-import { StudentDashboard } from './components/dashboard/student-dashboard/student-dashboard';
+import { StudentDashboard } from './components/student/dashboard/student-dashboard';
 import { OrgDashboardComponent } from './components/org-dashboard/org-dashboard';
 import { AdminDashboard } from './components/admin/admin-dashboard/admin-dashboard';
 import { AuthGuard } from './guards/auth-guard';
@@ -14,9 +14,9 @@ import { AdminProfileComponent } from './components/admin/admin-profile/admin-pr
 import { AdminChangePasswordComponent } from './components/admin/admin-change-password/admin-change-password';
 import { CalendarView } from './components/admin/admin-dashboard/calendar/calendar-view/calendar-view';
 
-import { StudentProfileComponent } from './components/profile/profile';
+import { StudentProfileComponent } from './components/student/profile/profile';
 import { OrgProfileComponent } from './components/org-profile/org-profile';
-import { StudentChangePasswordComponent } from './components/student-change-password/student-change-password';
+import { StudentChangePasswordComponent } from './components/student/student-change-password/student-change-password';
 import { OrgChangePasswordComponent } from './components/org-change-password/org-change-password';
 
 export const routes: Routes = [
