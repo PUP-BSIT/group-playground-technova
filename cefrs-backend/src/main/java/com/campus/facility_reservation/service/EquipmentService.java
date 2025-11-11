@@ -52,12 +52,18 @@ public class EquipmentService {
         equipment.setQuantityAvailable(request.getQuantityTotal());
         equipment.setDescription(request.getDescription());
         equipment.setImageUrl(request.getImageUrl());
-        equipment.setStatus(EquipmentStatus.AVAILABLE);
         
+        // Allow status to be set, default to AVAILABLE
+        if (request.getStatus() != null) {
+            equipment.setStatus(EquipmentStatus.valueOf(request.getStatus().toUpperCase()));
+        } else {
+            equipment.setStatus(EquipmentStatus.AVAILABLE);
+        }
+
         Equipment saved = equipmentRepository.save(equipment);
         return convertToDTO(saved);
     }
-    
+
     @Transactional
     public EquipmentDTO updateEquipment(Long id, EquipmentRequestDTO request) {
         Equipment equipment = equipmentRepository.findById(id)
@@ -69,6 +75,12 @@ public class EquipmentService {
         equipment.setDescription(request.getDescription());
         equipment.setImageUrl(request.getImageUrl());
         
+        // IMPORTANT: Set status from request, don't calculate it!
+        if (request.getStatus() != null && !request.getStatus().isEmpty()) {
+            equipment.setStatus(EquipmentStatus.valueOf(request.getStatus().toUpperCase()));
+        }
+
+        // DO NOT auto-set status based on quantity here!
         Equipment updated = equipmentRepository.save(equipment);
         return convertToDTO(updated);
     }
