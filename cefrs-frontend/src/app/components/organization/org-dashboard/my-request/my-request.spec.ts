@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { OrgMyRequestComponent } from './my-request';
 
 describe('OrgMyRequestComponent', () => {
@@ -7,7 +9,11 @@ describe('OrgMyRequestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrgMyRequestComponent]
+      imports: [OrgMyRequestComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
     })
     .compileComponents();
 
@@ -20,4 +26,3 @@ describe('OrgMyRequestComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
