@@ -49,7 +49,7 @@ public class FacilityService {
                 .collect(Collectors.toList());
     }
     
-    @Transactional
+   @Transactional
     public FacilityDTO createFacility(FacilityDTO facilityDTO) {
         Facility facility = new Facility();
         facility.setName(facilityDTO.getName());
@@ -59,12 +59,18 @@ public class FacilityService {
         facility.setCapacity(facilityDTO.getCapacity());
         facility.setDescription(facilityDTO.getDescription());
         facility.setImageUrl(facilityDTO.getImageUrl());
-        facility.setStatus(FacilityStatus.AVAILABLE);
         
+        // Set status from DTO or default to AVAILABLE
+        if (facilityDTO.getStatus() != null && !facilityDTO.getStatus().isEmpty()) {
+            facility.setStatus(FacilityStatus.valueOf(facilityDTO.getStatus().toUpperCase()));
+        } else {
+            facility.setStatus(FacilityStatus.AVAILABLE);
+        }
+
         Facility saved = facilityRepository.save(facility);
         return convertToDTO(saved);
     }
-    
+
     @Transactional
     public FacilityDTO updateFacility(Long id, FacilityDTO facilityDTO) {
         Facility facility = facilityRepository.findById(id)
@@ -78,6 +84,11 @@ public class FacilityService {
         facility.setDescription(facilityDTO.getDescription());
         facility.setImageUrl(facilityDTO.getImageUrl());
         
+        // Update status from DTO
+        if (facilityDTO.getStatus() != null && !facilityDTO.getStatus().isEmpty()) {
+            facility.setStatus(FacilityStatus.valueOf(facilityDTO.getStatus().toUpperCase()));
+        }
+
         Facility updated = facilityRepository.save(facility);
         return convertToDTO(updated);
     }
