@@ -8,7 +8,6 @@ import { EquipmentService } from '../../../services/equipment.service';
 import { FacilityService } from '../../../services/facility.service';
 import { ReservationService, ReservationRequest } from '../../../services/reservation.service';
 import { EquipmentBorrowingService, BorrowingRequest } from '../../../services/equipment-borrowing.service';
-import { SidebarComponent } from '../../sidebar/sidebar';
 import { StudentSidebarComponent } from '../student-sidebar/student-sidebar';
 
 // --- INTERFACES ---
@@ -146,10 +145,8 @@ export class StudentDashboard implements OnInit {
   fetchEquipment(): void {
     this.isLoadingEquipment = true;
     this.equipmentService.getAvailableEquipment().subscribe({
-      next: (response) => {
-        if (response) {
-          this.equipment = response;
-        }
+      next: (equipmentList) => {
+        this.equipment = equipmentList;
         this.isLoadingEquipment = false;
         console.log('Equipment loaded:', this.equipment);
       },
@@ -163,9 +160,10 @@ export class StudentDashboard implements OnInit {
   fetchFacilities(): void {
     this.isLoadingFacilities = true;
     this.facilityService.getAvailableFacilities().subscribe({
-      next: (response: any) => {
-        this.facilities = response.data;
+      next: (facilities) => {
+        this.facilities = facilities || [];
         this.isLoadingFacilities = false;
+        console.log('Facilities loaded:', this.facilities);
       },
       error: (err: any) => {
         console.error('Error fetching facilities:', err);
@@ -256,6 +254,10 @@ export class StudentDashboard implements OnInit {
 
   // Filter facilities
   get filteredFacilities(): Facility[] {
+    if (!this.facilities || !Array.isArray(this.facilities)) {
+      return [];
+    }
+
     if (!this.searchQuery.trim()) {
       return this.facilities;
     }
@@ -335,6 +337,7 @@ export class StudentDashboard implements OnInit {
       log.newValues?.toLowerCase().includes(query)
     );
   }
+
   // Open equipment borrowing modal
   requestEquipment(equipmentId: number): void {
     const equipment = this.equipment.find(e => e.id === equipmentId);
