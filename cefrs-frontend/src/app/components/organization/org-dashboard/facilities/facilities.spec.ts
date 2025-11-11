@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { OrgFacilitiesComponent } from './facilities';
 
-describe('OrgFacilitiesComponent', () => {
+describe('Facilities', () => {
   let component: OrgFacilitiesComponent;
   let fixture: ComponentFixture<OrgFacilitiesComponent>;
 
@@ -20,4 +21,3 @@ describe('OrgFacilitiesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
