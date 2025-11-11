@@ -15,6 +15,12 @@ interface Equipment {
   status: string;
 }
 
+interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
+
 @Component({
   selector: 'app-org-equipment',
   standalone: true,
@@ -53,13 +59,11 @@ export class OrgEquipmentComponent implements OnInit {
   fetchEquipment(): void {
     this.isLoadingEquipment = true;
     this.equipmentService.getAvailableEquipment().subscribe({
-      next: (response) => {
-        if (response) {
-          this.equipment = response;
-        }
+      next: (equipmentList) => {
+        this.equipment = equipmentList;
         this.isLoadingEquipment = false;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error fetching equipment:', err);
         this.isLoadingEquipment = false;
         this.equipment = [];
@@ -137,7 +141,7 @@ export class OrgEquipmentComponent implements OnInit {
     };
 
     this.borrowingService.createBorrowing(request).subscribe({
-      next: (response) => {
+      next: (response: ApiResponse<any>) => {
         this.borrowingLoading = false;
         if (response.success) {
           this.closeEquipmentModal();
@@ -146,7 +150,7 @@ export class OrgEquipmentComponent implements OnInit {
           this.fetchEquipment();
         }
       },
-      error: (err) => {
+      error: (err: any) => {
         this.borrowingLoading = false;
         this.borrowingError = err.error?.message || 'Failed to submit borrowing request';
         console.error('Error creating borrowing:', err);
@@ -208,7 +212,8 @@ export class OrgEquipmentComponent implements OnInit {
       Returned: 'status-returned',
       Available: 'status-available',
       AVAILABLE: 'status-available',
-      Reserved: 'status-reserved'
+      Reserved: 'status-reserved',
+      Completed: 'status-completed'
     };
     return map[status] || '';
   }
