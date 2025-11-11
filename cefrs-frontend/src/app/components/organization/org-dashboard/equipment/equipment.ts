@@ -54,8 +54,8 @@ export class OrgEquipmentComponent implements OnInit {
     this.isLoadingEquipment = true;
     this.equipmentService.getAvailableEquipment().subscribe({
       next: (response) => {
-        if (response.success && response.data) {
-          this.equipment = response.data;
+        if (response) {
+          this.equipment = response;
         }
         this.isLoadingEquipment = false;
       },
