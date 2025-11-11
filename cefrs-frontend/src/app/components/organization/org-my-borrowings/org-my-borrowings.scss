@@ -1,4 +1,4 @@
-.my-reservations-container {
+.my-borrowings-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -45,17 +45,17 @@
     color: #dc3545;
   }
 
-  .reservations-list {
+  .borrowings-list {
     display: grid;
     gap: 1.5rem;
 
-    .reservation-card {
+    .borrowing-card {
       background: white;
       padding: 1.5rem;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-      .reservation-header {
+      .borrowing-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -82,24 +82,29 @@
             color: #155724;
           }
 
+          &.status-borrowed {
+            background-color: #cfe2ff;
+            color: #084298;
+          }
+
           &.status-rejected {
             background-color: #f8d7da;
             color: #721c24;
           }
 
-          &.status-cancelled {
+          &.status-returned {
             background-color: #e2e3e5;
             color: #383d41;
           }
 
-          &.status-completed {
-            background-color: #cfe2ff;
-            color: #084298;
+          &.status-overdue {
+            background-color: #f8d7da;
+            color: #721c24;
           }
         }
       }
 
-      .reservation-details {
+      .borrowing-details {
         margin-bottom: 1rem;
 
         .detail-item {
@@ -112,15 +117,9 @@
           }
         }
       }
-
-      .reservation-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
     }
 
-    .no-reservations {
+    .no-borrowings {
       text-align: center;
       padding: 3rem;
       color: #666;
@@ -147,16 +146,6 @@
         background-color: #0056b3;
       }
     }
-
-    &.btn-danger {
-      background-color: #dc3545;
-      color: white;
-
-      &:hover {
-        background-color: #c82333;
-      }
-    }
   }
 }
-
 
