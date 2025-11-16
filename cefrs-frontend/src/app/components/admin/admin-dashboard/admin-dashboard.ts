@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth';
+import { ProfileService } from '../../../services/profile.service';
 
 // Import child components
 import { DashboardView } from './dashboard-view/dashboard-view';
@@ -16,6 +17,7 @@ import { CalendarView } from '../admin-dashboard/calendar/calendar-view/calendar
 interface NavItem {
   id: string;
   label: string;
+  icon: string;
 }
 
 @Component({
@@ -35,19 +37,54 @@ interface NavItem {
     CalendarView
   ]
 })
-export class AdminDashboard {
+export class AdminDashboard implements OnInit {
+  private router = inject(Router);
+  private authService = inject(AuthService);
+  private profileService = inject(ProfileService);
+
   currentView: string = 'dashboard';
-  constructor(private router: Router, private authService: AuthService) { }
+  user: any = null;
+  isLoading = true;
 
   navItems: NavItem[] = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'manage-request', label: 'Manage Request' },
-    { id: 'calendar', label: 'Calendar' },
-    { id: 'facilities', label: 'Facilities' },
-    { id: 'equipment', label: 'Equipment' },
-    { id: 'report-logs', label: 'Report and Logs' },
-    { id: 'settings', label: 'Settings' }
+    { id: 'dashboard', label: 'Dashboard', icon: 'assets/dashboard.png' },
+    { id: 'manage-request', label: 'Manage Request', icon: 'assets/manage.png' },
+    { id: 'calendar', label: 'Calendar', icon: 'assets/calendar.png' },
+    { id: 'facilities', label: 'Facilities', icon: 'assets/facilities.png' },
+    { id: 'equipment', label: 'Equipment', icon: 'assets/equipment.png' },
+    { id: 'report-logs', label: 'Report and Logs', icon: 'assets/report.png' },
+    { id: 'settings', label: 'Settings', icon: 'assets/settings.png' }
   ];
+
+  ngOnInit(): void {
+    this.loadUserProfile();
+  }
+
+  private loadUserProfile(): void {
+    this.isLoading = true;
+    this.profileService.getProfile().subscribe({
+      next: (data: any) => {
+        this.isLoading = false;
+        let displayName: string;
+        displayName = data.firstName && data.lastName 
+          ? `${data.firstName} ${data.lastName}` 
+          : data.email || 'Admin';
+        
+        this.user = {
+          name: displayName,
+          email: data.email || 'admin@example.com'
+        };
+      },
+      error: (err) => {
+        console.error('Error loading user profile for sidebar:', err);
+        this.isLoading = false;
+        this.user = {
+          name: 'Admin',
+          email: 'admin@example.com'
+        };
+      }
+    });
+  }
 
   setCurrentView(view: string): void {
     this.currentView = view;
@@ -57,6 +94,16 @@ export class AdminDashboard {
   }
 
   logout(): void {
+    // Clear all authentication data
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
+    sessionStorage.clear();
+    
+    // Reset user data
+    this.user = null;
+    
+    // Use authService logout
     this.authService.logout();
     this.router.navigate(['/admin-login']);
   }
