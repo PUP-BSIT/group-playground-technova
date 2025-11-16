@@ -7,6 +7,13 @@ $text-primary: #333333;
 $text-secondary: #666666;
 $border-color: #e0e0e0;
 
+$spacing-xs: 2px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+$spacing-2xl: 24px;
+
 $sidebar-width: 265px;
 $sidebar-width-container: 271px;
 
@@ -99,23 +106,27 @@ $font-family: 'Roboto', sans-serif;
   text-align: center;
 }
 
+
+.icon{
+  width: 20px;
+  height: 20px;
+  margin-right: $spacing-md;
+  vertical-align: middle;
+}
+
+.icon-2{
+  width: 26px;
+  height: 26px;
+  margin-right: $spacing-md;
+  vertical-align: middle;
+}
+
 .user-profile {
   padding: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   gap: 12px;
-
-  .user-avatar {
-    width: 48px;
-    height: 48px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
 
   .user-info {
     flex: 1;
