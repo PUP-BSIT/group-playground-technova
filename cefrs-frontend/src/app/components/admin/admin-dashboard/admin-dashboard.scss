@@ -7,13 +7,6 @@ $text-primary: #333333;
 $text-secondary: #666666;
 $border-color: #e0e0e0;
 
-$spacing-xs: 2px;
-$spacing-sm: 8px;
-$spacing-md: 12px;
-$spacing-lg: 16px;
-$spacing-xl: 20px;
-$spacing-2xl: 24px;
-
 $sidebar-width: 265px;
 $sidebar-width-container: 271px;
 
@@ -104,21 +97,6 @@ $font-family: 'Roboto', sans-serif;
   line-height: 0.6;
   font-family: $font-family;
   text-align: center;
-}
-
-
-.icon{
-  width: 20px;
-  height: 20px;
-  margin-right: $spacing-md;
-  vertical-align: middle;
-}
-
-.icon-2{
-  width: 26px;
-  height: 26px;
-  margin-right: $spacing-md;
-  vertical-align: middle;
 }
 
 .user-profile {
