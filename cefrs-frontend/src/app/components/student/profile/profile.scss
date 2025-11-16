@@ -15,10 +15,12 @@
 }
 
 .profile-container {
+  max-width: 900px;
+  margin: 0 auto;
   padding: 0;
   background-color: transparent;
   height: 100%;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
 
   .nav-header {
     display: flex;
